@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    background-color: #f2faf5;
+    color: #1e293b;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    margin: 0;
+  }
+
+  h1, h2, h3, .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+}
+
+/* Atmospheric Ambient Lighting Blobs - Bright Pastel Canvas */
+.liquid-blob-green {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(167, 243, 208, 0.35) 50%, rgba(242, 250, 245, 0) 100%);
+  filter: blur(100px);
+}
+
+.liquid-blob-amber {
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.25) 0%, rgba(254, 243, 199, 0.4) 50%, rgba(242, 250, 245, 0) 100%);
+  filter: blur(120px);
+}
+
+.liquid-blob-blue {
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.22) 0%, rgba(224, 242, 254, 0.4) 50%, rgba(242, 250, 245, 0) 100%);
+  filter: blur(120px);
+}
+
+/* Custom Ultra-Glassy utilities (Colores Claros & Vidrioso) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(32px) saturate(190%);
+  -webkit-backdrop-filter: blur(32px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.glass-panel-interactive {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(32px) saturate(190%);
+  -webkit-backdrop-filter: blur(32px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.08), 0 2px 8px rgba(0, 0, 0, 0.02), inset 0 1px 1px rgba(255, 255, 255, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-interactive:hover {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 24px 50px -10px rgba(16, 185, 129, 0.16), inset 0 1px 1px rgba(255, 255, 255, 1);
+  transform: translateY(-3px) scale(1.008);
+}
+
+.glass-panel-emerald {
+  background: rgba(236, 253, 245, 0.85);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  box-shadow: 0 20px 45px -10px rgba(16, 185, 129, 0.12), inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Glowing text and status badges for kids */
+.glow-text-emerald {
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.glow-emerald-box {
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+}
+
+/* Smooth Infinite Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: 200%;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Blob Animations */
+@keyframes blob-float {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(40px, -40px) scale(1.08);
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.95);
+  }
+}
+
+.animate-blob {
+  animation: blob-float 16s infinite ease-in-out;
+}
+
+.animation-delay-2000 {
+  animation-delay: 3s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 6s;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f2faf5;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.6);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom Minigame Utilities */
+body.hide-navbar nav,
+body.hide-navbar .bottom-nav-container,
+body.hide-navbar header {
+  display: none !important;
+}
+
+.hand-drawn {
+  font-family: 'Fredoka', sans-serif;
+  letter-spacing: -0.01em;
+}
+.bg-eco-dark {
+  background-color: #0d1c15;
+}
+.text-eco-dark {
+  color: #00ff88;
+}
+.bg-eco-paper {
+  background-color: #183024;
+}
+.bg-eco-green {
+  background-color: #00ff88;
+}
+.shadow-sketch {
+  box-shadow: 4px 4px 0px #00ff88;
+}
+.shadow-sketch-sm {
+  box-shadow: 2px 2px 0px #00ff88;
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}

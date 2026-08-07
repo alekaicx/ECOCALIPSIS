@@ -1,0 +1,6 @@
+{
+  "name": "Ecocalipsis: La última oportunidad",
+  "description": "Plataforma ambiental interactiva y gamificada para los estudiantes de la IED Pío X. Aprende reciclando, participa en capacitaciones y apoya proyectos de reforestación en Colombia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

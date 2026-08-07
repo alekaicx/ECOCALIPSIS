@@ -1,0 +1,23 @@
+--- src/components/EcoTips.tsx
++++ src/components/EcoTips.tsx
+@@ -19,10 +19,17 @@
+ export const EcoTips: React.FC<EcoTipsProps> = () => {
+   const [brushingMinutes, setBrushingMinutes] = useState(3);
+   const [useCup, setUseCup] = useState(true);
++  const [showerMinutes, setShowerMinutes] = useState(10);
++  const [targetShowerMinutes, setTargetShowerMinutes] = useState(5);
++  const [calcMode, setCalcMode] = useState<'water' | 'paper'>('water');
++  const [paperSaved, setPaperSaved] = useState(10); // hojas por día
+   
+   const litersPerDayOpen = brushingMinutes * 12 * 2;
+   const litersPerDayCup = 0.5;
+-  const monthlyWaterSaved = Math.round((litersPerDayOpen - (useCup ? litersPerDayCup : litersPerDayOpen)) * 30);
++  const monthlyBrushingSaved = Math.round((litersPerDayOpen - (useCup ? litersPerDayCup : litersPerDayOpen)) * 30);
++  const monthlyShowerSaved = Math.round(Math.max(0, (showerMinutes - targetShowerMinutes) * 12 * 30));
++  const totalWaterSaved = monthlyBrushingSaved + monthlyShowerSaved;
++  const waterSavedText = `${totalWaterSaved} Litros`;
++  
++  const monthlyTreesSaved = (paperSaved * 30) / 8000; // 1 arbol ~ 8000 hojas
++  const paperSavedText = `${(paperSaved * 30)} Hojas (~${monthlyTreesSaved.toFixed(3)} Árboles)`;
+ 
+   return (
