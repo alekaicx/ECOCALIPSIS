@@ -40,20 +40,21 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   return (
-    <header className="sticky top-0 z-40 w-full px-3 sm:px-6 pt-3 pb-1">
-      <nav className="mx-auto max-w-4xl bg-[#0f2018]/80 rounded-full px-4 py-2.5 border border-[#00ff88]/20 backdrop-blur-xl shadow-xl flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full px-3 sm:px-6 pt-3 pb-1 bg-transparent backdrop-blur-md">
+      <nav className="relative mx-auto max-w-4xl bg-[#0c1f17]/70 hover:bg-[#0c1f17]/90 rounded-full px-5 py-2.5 border border-[#00ff88]/30 border-t-white/30 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,255,136,0.22)] transition-all duration-300 flex items-center justify-between overflow-hidden">
+        {/* Liquid Glass Highlight Reflection */}
+        <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none" />
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-3/4 h-12 bg-[#00ff88]/20 blur-2xl pointer-events-none" />
         {/* Brand Logo & Title */}
         <div 
           onClick={() => setActiveSection('quienes-somos')}
           className="flex items-center gap-2.5 cursor-pointer group"
         >
-          <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-[#00ff88]/10 border border-[#00ff88]/30 group-hover:bg-[#00ff88]/20 transition-all duration-300 overflow-hidden">
-            <img 
-              src="https://i.ibb.co/N52xC5L/Whats-App-Image-2026-08-07-at-1-58-55-PM-removebg-preview.png" 
-              alt="Dino Ecocalipsis" 
-              className="w-6 h-6 object-contain drop-shadow-[0_0_5px_rgba(0,255,136,0.6)]" 
-            />
-          </div>
+          <img 
+            src="https://i.ibb.co/vx4nhDRR/Chat-GPT-Image-28-jul-2026-18-13-59-removebg-preview.png" 
+            alt="Ecocalipsis Logo" 
+            className="w-9 h-9 object-contain drop-shadow-[0_0_8px_rgba(0,255,136,0.7)] group-hover:scale-105 transition-transform duration-300" 
+          />
           <div>
             <span className="text-lg sm:text-xl font-black tracking-tight text-[#00ff88] uppercase font-sans">
               Ecocalipsis
@@ -63,20 +64,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right Action Controls */}
         <div className="flex items-center gap-2">
-          {/* Instalar App Button */}
-          {handleInstallClick && (
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleInstallClick}
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-[#00ff88]/20 via-[#00ff88]/30 to-emerald-400/20 border border-[#00ff88]/60 text-[#00ff88] hover:bg-[#00ff88] hover:text-slate-950 font-black text-[10px] sm:text-[11px] uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(0,255,136,0.25)] cursor-pointer"
-              title="Instalar Ecocalipsis en la pantalla principal"
-            >
-              <Download className="w-3.5 h-3.5 stroke-[2.5]" />
-              <span>Instalar</span>
-            </motion.button>
-          )}
-
           {/* Active Account / Profile Pic */}
           <div 
             onClick={() => setActiveSection('seguimiento')}

@@ -181,6 +181,7 @@ export default function App() {
                   onNavigate={setActiveSection} 
                   onOpenSurvey={() => setIsSurveyOpen(true)} 
                   onTriggerBadgeAction={triggerBadgeAction} 
+                  onOpenInstallModal={() => setIsInstallModalOpen(true)}
                 />
               )}
 

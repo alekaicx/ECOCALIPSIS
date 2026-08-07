@@ -9,7 +9,8 @@ import {
   Zap,
   Smile,
   ShieldCheck,
-  Star
+  Star,
+  Download
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
@@ -19,9 +20,10 @@ interface AboutUsProps {
   onNavigate?: (section: Section) => void;
   onOpenSurvey?: () => void;
   onTriggerBadgeAction?: (actionId: string, value?: any) => void;
+  onOpenInstallModal?: () => void;
 }
 
-export const AboutUs: React.FC<AboutUsProps> = ({ onNavigate, onOpenSurvey }) => {
+export const AboutUs: React.FC<AboutUsProps> = ({ onNavigate, onOpenSurvey, onOpenInstallModal }) => {
   const [unlockedPowers, setUnlockedPowers] = useState<number[]>([]);
   const [readMision, setReadMision] = useState(false);
   const [readVision, setReadVision] = useState(false);
@@ -56,8 +58,23 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onNavigate, onOpenSurvey }) =>
       <motion.div 
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="p-6 sm:p-8 rounded-[32px] bg-[#11221a]/90 border border-[#00ff88]/20 shadow-2xl backdrop-blur-md space-y-4 text-center"
+        className="p-6 sm:p-8 rounded-[32px] bg-[#0c1a13]/90 border border-[#00ff88]/30 shadow-2xl backdrop-blur-md space-y-4 text-center relative overflow-hidden"
       >
+        {/* Liquid Glass Install Button */}
+        {onOpenInstallModal && (
+          <div className="flex justify-center mb-1">
+            <motion.button
+              whileHover={{ scale: 1.06, backgroundColor: "rgba(255, 255, 255, 0.18)" }}
+              whileTap={{ scale: 0.95 }}
+              onClick={onOpenInstallModal}
+              className="group flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-white/10 border border-white/25 backdrop-blur-xl text-white font-black text-xs sm:text-sm tracking-wider uppercase shadow-[0_8px_32px_0_rgba(0,255,136,0.3)] hover:border-[#00ff88] hover:text-[#00ff88] hover:shadow-[0_8px_32px_0_rgba(0,255,136,0.6)] transition-all duration-300 cursor-pointer"
+            >
+              <Download className="w-4 h-4 text-[#00ff88] group-hover:animate-bounce" />
+              <span>Instalar Aplicación</span>
+            </motion.button>
+          </div>
+        )}
+
         <h1 className="text-3xl sm:text-4xl font-extrabold text-[#00ff88] tracking-tight">
           ¡Somos la última generación que puede salvar el planeta! 🌍
         </h1>

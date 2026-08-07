@@ -2,7 +2,9 @@ import { initializeApp } from "firebase/app";
 import { 
   getAuth, 
   GoogleAuthProvider, 
-  signInWithPopup, 
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword, 
   signOut, 
   onAuthStateChanged,
   User
@@ -60,5 +62,5 @@ export async function saveSurveyResult(result: any): Promise<void> {
   }
 }
 
-export { signInWithPopup, signOut, onAuthStateChanged };
+export { signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged };
 export type { User };
