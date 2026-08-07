@@ -24,7 +24,13 @@ const createNewSession = (): ChatSession => ({
   date: Date.now()
 });
 
-export const EcoIAWidget: React.FC = () => {
+interface EcoIAWidgetProps {
+  hidden?: boolean;
+}
+
+export const EcoIAWidget: React.FC<EcoIAWidgetProps> = ({ hidden = false }) => {
+  if (hidden) return null;
+
   const [isOpen, setIsOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   

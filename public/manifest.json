@@ -1,0 +1,17 @@
+{
+  "short_name": "Ecocalipsis",
+  "name": "Ecocalipsis — La Última Oportunidad | IED Pío X",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/N52xC5L/Whats-App-Image-2026-08-07-at-1-58-55-PM-removebg-preview.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "https://ecocalipsis.netlify.app",
+  "background_color": "#050505",
+  "theme_color": "#00ff88",
+  "display": "standalone",
+  "orientation": "portrait"
+}

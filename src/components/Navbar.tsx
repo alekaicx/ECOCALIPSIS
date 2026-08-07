@@ -6,7 +6,8 @@ import {
   Leaf,
   Star,
   User as UserIcon,
-  LogOut
+  LogOut,
+  Download
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { auth, onAuthStateChanged, signOut, User as FirebaseUser } from '../lib/firebase';
@@ -15,13 +16,20 @@ interface NavbarProps {
   activeSection: Section;
   setActiveSection: (section: Section) => void;
   student: StudentProfile;
+  onOpenInstallModal?: () => void;
+  onInstall?: () => void;
+  deferredPrompt?: any;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeSection,
   setActiveSection,
-  student
+  student,
+  onOpenInstallModal,
+  onInstall,
+  deferredPrompt
 }) => {
+  const handleInstallClick = onInstall || onOpenInstallModal;
   const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null);
 
   useEffect(() => {
@@ -39,8 +47,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => setActiveSection('quienes-somos')}
           className="flex items-center gap-2.5 cursor-pointer group"
         >
-          <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-[#00ff88]/10 border border-[#00ff88]/30 group-hover:bg-[#00ff88]/20 transition-all duration-300">
-            <Leaf className="w-4 h-4 text-[#00ff88]" />
+          <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-[#00ff88]/10 border border-[#00ff88]/30 group-hover:bg-[#00ff88]/20 transition-all duration-300 overflow-hidden">
+            <img 
+              src="https://i.ibb.co/N52xC5L/Whats-App-Image-2026-08-07-at-1-58-55-PM-removebg-preview.png" 
+              alt="Dino Ecocalipsis" 
+              className="w-6 h-6 object-contain drop-shadow-[0_0_5px_rgba(0,255,136,0.6)]" 
+            />
           </div>
           <div>
             <span className="text-lg sm:text-xl font-black tracking-tight text-[#00ff88] uppercase font-sans">
@@ -51,6 +63,20 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right Action Controls */}
         <div className="flex items-center gap-2">
+          {/* Instalar App Button */}
+          {handleInstallClick && (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleInstallClick}
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-gradient-to-r from-[#00ff88]/20 via-[#00ff88]/30 to-emerald-400/20 border border-[#00ff88]/60 text-[#00ff88] hover:bg-[#00ff88] hover:text-slate-950 font-black text-[10px] sm:text-[11px] uppercase tracking-wider transition-all shadow-[0_0_12px_rgba(0,255,136,0.25)] cursor-pointer"
+              title="Instalar Ecocalipsis en la pantalla principal"
+            >
+              <Download className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>Instalar</span>
+            </motion.button>
+          )}
+
           {/* Active Account / Profile Pic */}
           <div 
             onClick={() => setActiveSection('seguimiento')}

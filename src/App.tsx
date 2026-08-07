@@ -19,6 +19,7 @@ import { ReforestationSupport } from './components/ReforestationSupport';
 import { LoginWidget } from './components/LoginWidget';
 import { EcoSurvey } from './components/EcoSurvey';
 import { EcoIAWidget } from './components/EcoIAWidget';
+import { InstallAppModal } from './components/InstallAppModal';
 import { FIFTY_BADGES, BadgeItem } from './data/badgesData';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
@@ -40,6 +41,17 @@ export default function App() {
   const [isSurveyOpen, setIsSurveyOpen] = useState(false);
   const [newlyUnlockedBadge, setNewlyUnlockedBadge] = useState<BadgeItem | null>(null);
   const [isWorkshopOpen, setIsWorkshopOpen] = useState(false);
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+  }, []);
 
   // Core system that identifies and unlocks the two official badges based on actual in-app events
   const triggerBadgeAction = (actionId: string, value: any = true) => {
@@ -148,6 +160,8 @@ export default function App() {
           activeSection={activeSection}
           setActiveSection={setActiveSection}
           student={student}
+          onOpenInstallModal={() => setIsInstallModalOpen(true)}
+          deferredPrompt={deferredPrompt}
         />
 
         {/* Dynamic Section Content with Motion Transitions */}
@@ -297,7 +311,14 @@ export default function App() {
       />
 
       {/* Floating Interactive EcoIA Spherical Widget */}
-      <EcoIAWidget />
+      <EcoIAWidget hidden={activeSection === 'juego' || isWorkshopOpen || isSurveyOpen} />
+
+      {/* PWA Direct Installation Modal */}
+      <InstallAppModal 
+        isOpen={isInstallModalOpen} 
+        onClose={() => setIsInstallModalOpen(false)} 
+        deferredPrompt={deferredPrompt}
+      />
 
       {/* GORGEOUS ACHIEVEMENT UNLOCKED FULLSCREEN CELEBRATION CARDS OVERLAY */}
       <AnimatePresence>
