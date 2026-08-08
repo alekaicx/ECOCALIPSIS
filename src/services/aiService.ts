@@ -1,4 +1,4 @@
-import { GoogleGenAI } from '@google/genai';
+
 
 export async function askPioAI(userMessage: string, history: { sender: 'user' | 'ai'; text: string }[] = []): Promise<string> {
   // 1. Try backend server API first
@@ -24,22 +24,42 @@ export async function askPioAI(userMessage: string, history: { sender: 'user' | 
     console.log('Backend API unavailable (static hosting mode), trying client-side or fallback...', error);
   }
 
-  // 2. If VITE_GEMINI_API_KEY is available in client environment (e.g. Netlify env var), use Gemini SDK directly on client
-  const clientApiKey = typeof import.meta !== 'undefined' && (import.meta as any).env && (import.meta as any).env.VITE_GEMINI_API_KEY;
-  if (clientApiKey) {
-    try {
-      const ai = new GoogleGenAI({ apiKey: clientApiKey });
-      const prompt = `Eres "EcoIA", la Inteligencia Artificial ecológica interactiva de la app "Ecocalipsis" de la IED Pío X. Responde de forma breve (1-2 párrafos), alegre y con emojis para niños sobre ecología, reciclaje, agua y naturaleza. Pregunta: ${userMessage}`;
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: prompt
-      });
-      if (response && response.text) {
-        return response.text;
+  // 2. Client-side direct OpenRouter call
+  try {
+    const apiKey = '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';
+    const systemPrompt = `Eres "EcoIA", la Inteligencia Artificial ecológica interactiva de la app "Ecocalipsis" de la IED Pío X. Responde de forma breve (1-2 párrafos), alegre y con emojis para niños sobre ecología, reciclaje, agua y naturaleza.`;
+    
+    const formattedMessages = [
+      { role: 'system', content: systemPrompt },
+      ...(Array.isArray(history) ? history.map((h: any) => ({
+        role: h.sender === 'user' ? 'user' : 'assistant',
+        content: h.text
+      })) : []),
+      { role: 'user', content: userMessage }
+    ];
+
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'https://ecocalipsis-pio-x.app',
+        'X-Title': 'Ecocalipsis - IED Pio X',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'cohere/north-mini-code:free',
+        messages: formattedMessages,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.choices?.[0]?.message?.content) {
+        return data.choices[0].message.content;
       }
-    } catch (gErr) {
-      console.error('Client-side Gemini error:', gErr);
     }
+  } catch (err) {
+    console.error('Client OpenRouter direct error:', err);
   }
 
   // 3. Intelligent fallback responses for static deployment (Netlify) without backend server
