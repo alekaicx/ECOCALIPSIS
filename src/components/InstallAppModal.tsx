@@ -99,11 +99,8 @@ export const InstallAppModal: React.FC<InstallAppModalProps> = ({ isOpen, onClos
             </div>
 
             <h2 className="text-2xl font-black text-[#00ff88] tracking-tight">
-              Instalar Ecocalipsis 📲
+              Instalar Ecocalipsis
             </h2>
-            <p className="text-xs text-slate-300 max-w-xs mt-1">
-              Crea un acceso directo en tu pantalla principal para abrir <span className="text-[#00ff88] font-bold">ecocalipsis.netlify.app</span> con un solo toque.
-            </p>
           </div>
 
           {/* Main Action Button */}
@@ -121,7 +118,7 @@ export const InstallAppModal: React.FC<InstallAppModalProps> = ({ isOpen, onClos
                 className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#00ff88] via-emerald-400 to-teal-300 text-slate-950 font-black text-base shadow-[0_0_25px_rgba(0,255,136,0.5)] hover:shadow-[0_0_35px_rgba(0,255,136,0.8)] transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 <Download className="w-5 h-5 stroke-[2.5]" />
-                INSTALAR AHORA EN MI PANTALLA
+                Instalar ahora
               </motion.button>
             )}
 

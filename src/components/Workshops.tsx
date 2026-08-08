@@ -294,23 +294,17 @@ export const Workshops: React.FC<WorkshopsProps> = ({
                         </p>
                       </div>
 
-                      {/* Larger Video Watch Button & Thumbnail Without Box Background */}
-                      <a
-                        href="https://hglamioz.com/e/dxzactqni9wj"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block relative aspect-video w-full max-w-4xl overflow-hidden rounded-3xl border-2 border-amber-400/80 shadow-[0_20px_50px_rgba(245,158,11,0.3)] group cursor-pointer hover:border-amber-300 transition-all"
-                      >
-                        <img
-                          src="https://i.ibb.co/27V4Pk17/images-1.jpg"
-                          alt="Película El Lorax"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                          <Play className="w-24 h-24 sm:w-36 sm:h-36 fill-amber-400 text-amber-300 stroke-[1.2] drop-shadow-[0_10px_35px_rgba(245,158,11,0.9)] group-hover:scale-125 transition-transform duration-300 animate-pulse" />
-                        </div>
-                      </a>
+                      {/* Embedded OK.ru Video Player */}
+                      <div className="relative aspect-video w-full max-w-4xl overflow-hidden rounded-3xl border-2 border-amber-400/80 shadow-[0_20px_50px_rgba(245,158,11,0.3)] bg-black">
+                        <iframe
+                          className="w-full h-full"
+                          src="https://ok.ru/videoembed/7461508024964?nochat=1&hd=1"
+                          title="El Lorax"
+                          frameBorder="0"
+                          allow="autoplay; encrypted-media; fullscreen"
+                          allowFullScreen
+                        ></iframe>
+                      </div>
 
                       {/* Message below the movie */}
                       <div className="pt-2">

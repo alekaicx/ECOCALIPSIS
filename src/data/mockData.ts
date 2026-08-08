@@ -250,7 +250,7 @@ export const WORKSHOP_MODULES: WorkshopModule[] = [
     level: '',
     summary: '',
     icon: '🌳',
-    videoUrl: 'https://hglamioz.com/e/dxzactqni9wj',
+    videoUrl: 'https://ok.ru/videoembed/7461508024964?nochat=1&hd=1',
     content: [
       '🌳 Introducción: Los árboles son uno de los recursos naturales más importantes para la vida en la Tierra. Nos proporcionan el oxígeno que respiramos, ayudan a regular el clima, protegen las fuentes de agua y sirven de hogar para miles de especies de animales y plantas.',
       'Sin embargo, cada año millones de árboles son talados por la expansión de las ciudades, la agricultura, la minería y la explotación de la madera. Esto provoca la pérdida de biodiversidad y el aumento de la temperatura global.',

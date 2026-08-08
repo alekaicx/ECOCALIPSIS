@@ -23,11 +23,11 @@ const FOX_HURT = 'https://cdn.shopify.com/s/files/1/0738/0362/8732/files/Fox_Hur
 
 // --- JUEGO 1: FOX JETPACK ---
 
-const GRAVITY = 0.4; 
-const THRUST = -7; 
-const SCROLL_SPEED = 9; 
-const FUEL_DECAY = 0.20; 
-const SPAWN_RATE = 60; 
+const GRAVITY = 0.38; 
+const THRUST = -6.2; 
+const SCROLL_SPEED = 7.0; 
+const FUEL_DECAY = 0.18; 
+const SPAWN_RATE = 75; 
 
 const FUEL_SPRITE = 'https://cdn.shopify.com/s/files/1/0738/0362/8732/files/download-removebg-preview_12.png?v=1769030204';
 const POLLUTANT_SPRITES = ['https://cdn.shopify.com/s/files/1/0738/0362/8732/files/download-removebg-preview_9.png?v=1769029104'];
@@ -1605,15 +1605,9 @@ export const MiniGame: React.FC<MiniGameProps> = ({ onComplete, onTriggerBadgeAc
     return (
         <div className="min-h-[500px] flex flex-col items-center justify-center p-2 sm:p-4 max-w-4xl mx-auto">
             <div className="text-center mb-6 animate-in slide-in-from-top-4">
-                <span className="inline-block px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider text-[#00ff88] bg-[#00ff88]/10 border border-[#00ff88]/20 mb-2">
-                  🎮 ARCADE ECOLÓGICO • IED PÍO X
-                </span>
                 <h2 className="text-3xl sm:text-4xl font-extrabold text-[#00ff88] mb-1 tracking-tight">
                   Minijuegos Interactivos
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-300">
-                  Selecciona una aventura para ganar XP y subir de nivel ecológico.
-                </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">

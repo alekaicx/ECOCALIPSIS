@@ -443,10 +443,7 @@ export const StudentTracker: React.FC<StudentTrackerProps> = ({ student, setStud
           Cada taller y juego interactivo fortalece nuestro compromiso con la naturaleza. ¡Gracias a tu participación, hemos mejorado la conciencia ambiental de nuestra comunidad escolar en un <strong>56%</strong>!
         </p>
 
-        <div className="pt-2 flex items-center justify-between text-xs text-[#00ff88] font-bold">
-          <span>Ver progreso pedagógico completo</span>
-          <ArrowRight className="w-4 h-4" />
-        </div>
+
 
         {/* Conciencia Ambiental Progress Chart */}
         <div className="relative rounded-2xl overflow-hidden border border-[#00ff88]/20 mt-4 bg-[#0a1811] p-4 sm:p-6 text-center space-y-4">
