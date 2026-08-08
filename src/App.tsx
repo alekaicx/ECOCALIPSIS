@@ -42,15 +42,38 @@ export default function App() {
   const [newlyUnlockedBadge, setNewlyUnlockedBadge] = useState<BadgeItem | null>(null);
   const [isWorkshopOpen, setIsWorkshopOpen] = useState(false);
   const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
+  const [isAppInstalled, setIsAppInstalled] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
   useEffect(() => {
+    const checkInstalled = () => {
+      const standalone = 
+        window.matchMedia('(display-mode: standalone)').matches || 
+        (window.navigator as any).standalone === true ||
+        document.referrer.includes('android-app://') ||
+        localStorage.getItem('pwa_installed') === 'true';
+      setIsAppInstalled(!!standalone);
+    };
+    checkInstalled();
+
     const handleBeforeInstallPrompt = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
     };
+
+    const handleAppInstalled = () => {
+      setIsAppInstalled(true);
+      localStorage.setItem('pwa_installed', 'true');
+      setDeferredPrompt(null);
+    };
+
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
   }, []);
 
   // Core system that identifies and unlocks the two official badges based on actual in-app events
@@ -181,7 +204,7 @@ export default function App() {
                   onNavigate={setActiveSection} 
                   onOpenSurvey={() => setIsSurveyOpen(true)} 
                   onTriggerBadgeAction={triggerBadgeAction} 
-                  onOpenInstallModal={() => setIsInstallModalOpen(true)}
+                  onOpenInstallModal={isAppInstalled ? undefined : () => setIsInstallModalOpen(true)}
                 />
               )}
 

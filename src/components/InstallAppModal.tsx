@@ -22,13 +22,19 @@ export const InstallAppModal: React.FC<InstallAppModalProps> = ({ isOpen, onClos
 
     const handleAppInstalled = () => {
       setIsInstalled(true);
+      localStorage.setItem('pwa_installed', 'true');
       setInternalPrompt(null);
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     window.addEventListener('appinstalled', handleAppInstalled);
 
-    if (window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone) {
+    if (
+      window.matchMedia('(display-mode: standalone)').matches || 
+      (window.navigator as any).standalone === true ||
+      document.referrer.includes('android-app://') ||
+      localStorage.getItem('pwa_installed') === 'true'
+    ) {
       setIsInstalled(true);
     }
 

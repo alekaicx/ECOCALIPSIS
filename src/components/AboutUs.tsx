@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Flag, 
   Eye, 
@@ -27,6 +27,28 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onNavigate, onOpenSurvey, onOp
   const [unlockedPowers, setUnlockedPowers] = useState<number[]>([]);
   const [readMision, setReadMision] = useState(false);
   const [readVision, setReadVision] = useState(false);
+  const [isAppInstalled, setIsAppInstalled] = useState(false);
+
+  useEffect(() => {
+    const checkInstalled = () => {
+      const standalone = 
+        window.matchMedia('(display-mode: standalone)').matches || 
+        (window.navigator as any).standalone === true ||
+        document.referrer.includes('android-app://') ||
+        localStorage.getItem('pwa_installed') === 'true';
+      setIsAppInstalled(!!standalone);
+    };
+
+    checkInstalled();
+
+    const handleAppInstalled = () => {
+      setIsAppInstalled(true);
+      localStorage.setItem('pwa_installed', 'true');
+    };
+
+    window.addEventListener('appinstalled', handleAppInstalled);
+    return () => window.removeEventListener('appinstalled', handleAppInstalled);
+  }, []);
 
   const togglePower = (id: number) => {
     if (!unlockedPowers.includes(id)) {
@@ -60,8 +82,8 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onNavigate, onOpenSurvey, onOp
         animate={{ opacity: 1, y: 0 }}
         className="p-6 sm:p-8 rounded-[32px] bg-[#0c1a13]/90 border border-[#00ff88]/30 shadow-2xl backdrop-blur-md space-y-4 text-center relative overflow-hidden"
       >
-        {/* Liquid Glass Install Button */}
-        {onOpenInstallModal && (
+        {/* Liquid Glass Install Button - Oculto si la app ya está instalada */}
+        {onOpenInstallModal && !isAppInstalled && (
           <div className="flex justify-center mb-1">
             <motion.button
               whileHover={{ scale: 1.06, backgroundColor: "rgba(255, 255, 255, 0.18)" }}
