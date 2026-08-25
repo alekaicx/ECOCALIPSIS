@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="RecyclingGameScreen" extends="Group">
+    <interface>
+        <field id="scoreAwarded" type="integer" alwaysNotify="true" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/RecyclingGameScreen.brs" />
+
+    <children>
+        <!-- Game Stage Canvas (1760 x 780) -->
+        <Group id="gameArea" translation="[0, 0]">
+            <!-- Backdrop -->
+            <Rectangle
+                color="0x064E3B66"
+                width="1760"
+                height="780"
+            />
+
+            <!-- Game HUD (Score, Lives, Combo, Trash Type) -->
+            <Group id="gameHud" translation="[40, 25]">
+                <Label
+                    id="hudScore"
+                    text="Puntos: 0"
+                    font="font:LargeBoldSystemFont"
+                    color="0xFDE047FF"
+                    translation="[0, 0]"
+                />
+                <Label
+                    id="hudLives"
+                    text="Vidas: ❤️ ❤️ ❤️"
+                    font="font:MediumBoldSystemFont"
+                    color="0xF87171FF"
+                    translation="[400, 5]"
+                />
+                <Label
+                    id="hudStreak"
+                    text="Racha: x1"
+                    font="font:MediumBoldSystemFont"
+                    color="0x34D399FF"
+                    translation="[750, 5]"
+                />
+                <Label
+                    text="Usa ◀ ▶ para mover la caneca o presiona 1, 2, 3"
+                    font="font:SmallSystemFont"
+                    color="0x94A3B8FF"
+                    translation="[1150, 8]"
+                />
+            </Group>
+
+            <!-- Divider -->
+            <Rectangle
+                color="0x10B9814D"
+                width="1680"
+                height="2"
+                translation="[40, 75]"
+            />
+
+            <!-- Falling Residue Item Container -->
+            <Group id="fallingItemGroup" translation="[840, 120]">
+                <Rectangle
+                    id="itemBox"
+                    color="0x0F172AEE"
+                    width="180"
+                    height="120"
+                    translation="[0, 0]"
+                />
+                <Label
+                    id="itemIconLabel"
+                    text="🧴"
+                    font="font:LargeBoldSystemFont"
+                    horizAlign="center"
+                    width="180"
+                    translation="[0, 10]"
+                />
+                <Label
+                    id="itemNameLabel"
+                    text="Botella Plástica"
+                    font="font:SmallBoldSystemFont"
+                    color="0xFFFFFFFF"
+                    horizAlign="center"
+                    width="180"
+                    translation="[0, 70]"
+                />
+            </Group>
+
+            <!-- Bottom Recycling Bins (Lane 0: Blanca, Lane 1: Verde, Lane 2: Negra) -->
+            <!-- Lane 0: Blanca (Aprovechables) -->
+            <Group id="binBlanca" translation="[220, 560]">
+                <Rectangle
+                    id="binBg0"
+                    color="0xFFFFFFEE"
+                    width="380"
+                    height="170"
+                />
+                <Label
+                    text="CANECA BLANCA"
+                    font="font:MediumBoldSystemFont"
+                    color="0x0F172AFF"
+                    horizAlign="center"
+                    width="380"
+                    translation="[0, 20]"
+                />
+                <Label
+                    text="Plástico · Vidrio · Metal · Papel Limpio"
+                    font="font:SmallSystemFont"
+                    color="0x334155FF"
+                    horizAlign="center"
+                    width="380"
+                    wrap="true"
+                    translation="[10, 65]"
+                />
+                <Label
+                    text="[ Posición 1 (◀ Izquierda) ]"
+                    font="font:SmallBoldSystemFont"
+                    color="0x059669FF"
+                    horizAlign="center"
+                    width="380"
+                    translation="[0, 125]"
+                />
+            </Group>
+
+            <!-- Lane 1: Verde (Orgánicos) -->
+            <Group id="binVerde" translation="[690, 560]">
+                <Rectangle
+                    id="binBg1"
+                    color="0x15803DEE"
+                    width="380"
+                    height="170"
+                />
+                <Label
+                    text="CANECA VERDE"
+                    font="font:MediumBoldSystemFont"
+                    color="0xFFFFFFFF"
+                    horizAlign="center"
+                    width="380"
+                    translation="[0, 20]"
+                />
+                <Label
+                    text="Restos de comida · Frutas · Cáscaras"
+                    font="font:SmallSystemFont"
+                    color="0xBBF7D0FF"
+                    horizAlign="center"
+                    width="380"
+                    wrap="true"
+                    translation="[10, 65]"
+                />
+                <Label
+                    text="[ Posición 2 (▲ Centro) ]"
+                    font="font:SmallBoldSystemFont"
+                    color="0xFDE047FF"
+                    horizAlign="center"
+                    width="380"
+                    translation="[0, 125]"
+                />
+            </Group>
+
+            <!-- Lane 2: Negra (No aprovechables) -->
+            <Group id="binNegra" translation="[1160, 560]">
+                <Rectangle
+                    id="binBg2"
+                    color="0x0F172AEE"
+                    width="380"
+                    height="170"
+                />
+                <Label
+                    text="CANECA NEGRA"
+                    font="font:MediumBoldSystemFont"
+                    color="0xF87171FF"
+                    horizAlign="center"
+                    width="380"
+                    translation="[0, 20]"
+                />
+                <Label
+                    text="Papel higiénico · Servilletas sucias · Desechos"
+                    font="font:SmallSystemFont"
+                    color="0x94A3B8FF"
+                    horizAlign="center"
+                    width="380"
+                    wrap="true"
+                    translation="[10, 65]"
+                />
+                <Label
+                    text="[ Posición 3 (▶ Derecha) ]"
+                    font="font:SmallBoldSystemFont"
+                    color="0x38BDF8FF"
+                    horizAlign="center"
+                    width="380"
+                    translation="[0, 125]"
+                />
+            </Group>
+
+            <!-- Catcher Target Selector Highlight Frame -->
+            <Rectangle
+                id="catcherHighlight"
+                color="0x00000000"
+                width="390"
+                height="180"
+                translation="[685, 555]"
+            />
+
+            <!-- Game Feedback Message (¡Excelente!, ¡Incorrecto!) -->
+            <Label
+                id="feedbackLabel"
+                text=""
+                font="font:LargeBoldSystemFont"
+                color="0x34D399FF"
+                horizAlign="center"
+                width="1760"
+                translation="[0, 480]"
+            />
+
+            <!-- Game Over Screen Modal -->
+            <Group id="gameOverModal" translation="[480, 180]" visible="false">
+                <Rectangle
+                    color="0x022C22F5"
+                    width="800"
+                    height="420"
+                />
+                <Label
+                    text="🎉 ¡JUEGO TERMINADO!"
+                    font="font:LargeBoldSystemFont"
+                    color="0xFDE047FF"
+                    horizAlign="center"
+                    width="800"
+                    translation="[0, 40]"
+                />
+                <Label
+                    id="finalScoreLabel"
+                    text="Puntuación Total: 120 Pts"
+                    font="font:MediumBoldSystemFont"
+                    color="0xFFFFFFFF"
+                    horizAlign="center"
+                    width="800"
+                    translation="[0, 120]"
+                />
+                <Label
+                    text="¡Tus puntos han sido sumados al récord ecológico de la IED Pío X!"
+                    font="font:SmallSystemFont"
+                    color="0x6EE7B7FF"
+                    horizAlign="center"
+                    width="700"
+                    wrap="true"
+                    translation="[50, 175]"
+                />
+
+                <ButtonGroup
+                    id="gameOverButtons"
+                    layoutDirection="horiz"
+                    itemSpacings="[25]"
+                    translation="[130, 280]"
+                >
+                    <Button id="btnRestartGame" text="🔄 Jugar de Nuevo (OK)" minWidth="260" height="55" />
+                    <Button id="btnExitGame" text="🏠 Volver al Inicio" minWidth="240" height="55" />
+                </ButtonGroup>
+            </Group>
+        </Group>
+
+        <!-- Game Loop Timer (tick every 50ms) -->
+        <Timer
+            id="gameTimer"
+            duration="0.05"
+            repeat="true"
+        />
+    </children>
+</component>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="VideoPlayerScreen" extends="Group">
+    <interface>
+        <field id="workshopItem" type="assocarray" onChange="onWorkshopItemChanged" />
+        <field id="videoFinished" type="boolean" alwaysNotify="true" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/VideoPlayerScreen.brs" />
+
+    <children>
+        <!-- Fullscreen Native Video Node -->
+        <Video
+            id="videoPlayer"
+            translation="[-80, -150]"
+            width="1920"
+            height="1080"
+        />
+
+        <!-- Top Title Bar Overlay (auto-hides during active playback) -->
+        <Group id="titleOverlay" translation="[-80, -150]">
+            <Rectangle
+                color="0x000000B3"
+                width="1920"
+                height="130"
+            />
+            <Label
+                id="videoTitleLabel"
+                text="Cine-Foro: El Lorax y la Deforestación"
+                font="font:LargeBoldSystemFont"
+                color="0xFFFFFFFF"
+                translation="[80, 30]"
+            />
+            <Label
+                id="videoSubtitleLabel"
+                text="IED Pío X · Presiona PAUSA/PLAY o OK para controlar · Presiona BACK para salir"
+                font="font:SmallSystemFont"
+                color="0x34D399FF"
+                translation="[80, 80]"
+            />
+        </Group>
+
+        <!-- Bottom Transport & Progress HUD -->
+        <Group id="hudOverlay" translation="[-80, 820]">
+            <Rectangle
+                color="0x000000CC"
+                width="1920"
+                height="110"
+            />
+
+            <!-- Time Display -->
+            <Label
+                id="timePositionLabel"
+                text="00:00 / 00:00"
+                font="font:MediumBoldSystemFont"
+                color="0xFDE047FF"
+                translation="[80, 35]"
+            />
+
+            <!-- Play / Pause / Buffering Status Text -->
+            <Label
+                id="playbackStateLabel"
+                text="▶ Reproduciendo..."
+                font="font:MediumSystemFont"
+                color="0x38BDF8FF"
+                translation="[450, 35]"
+            />
+
+            <!-- Quick help -->
+            <Label
+                text="◀◀ Retroceder 10s · Avanzar 10s ▶▶ · ⏸ Pausa (OK)"
+                font="font:SmallSystemFont"
+                color="0x94A3B8FF"
+                translation="[1150, 42]"
+            />
+        </Group>
+
+        <!-- Buffering Loading Spinner HUD -->
+        <Group id="bufferingHud" translation="[800, 420]" visible="false">
+            <Rectangle
+                color="0x064E3BEE"
+                width="320"
+                height="120"
+            />
+            <Label
+                text="⏳ Cargando Video..."
+                font="font:MediumBoldSystemFont"
+                color="0xFFFFFFFF"
+                horizAlign="center"
+                width="320"
+                translation="[0, 40]"
+            />
+        </Group>
+
+        <!-- Auto-Hide Overlay Timer -->
+        <Timer
+            id="overlayTimer"
+            duration="5"
+            repeat="false"
+        />
+    </children>
+</component>

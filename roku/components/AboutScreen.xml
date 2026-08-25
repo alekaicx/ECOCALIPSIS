@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="AboutScreen" extends="Group">
+    <script type="text/brightscript" uri="pkg:/components/AboutScreen.brs" />
+
+    <children>
+        <Group translation="[0, 0]">
+            <!-- Header -->
+            <Label
+                text="🏫 INSTITUCIÓN EDUCATIVA DEPARTAMENTAL PÍO X"
+                font="font:LargeBoldSystemFont"
+                color="0x34D399FF"
+                translation="[0, 0]"
+            />
+            <Label
+                text="Proyecto Ambiental Escolar (PRAE) · Aplicación Oficial para Televisores y Salones Roku TV"
+                font="font:SmallSystemFont"
+                color="0x94A3B8FF"
+                translation="[0, 40]"
+            />
+
+            <!-- Body Cards (Left About / Right Mission) -->
+            <Group translation="[0, 90]">
+                <!-- Left Card: PRAE & Vision -->
+                <Group translation="[0, 0]">
+                    <Rectangle color="0x064E3BCC" width="860" height="610" />
+                    <Label text="🌱 PROYECTO ECOCALIPSIS: LA ÚLTIMA OPORTUNIDAD" font="font:MediumBoldSystemFont" color="0xFDE047FF" translation="[35, 30]" />
+                    <Label
+                        text="Ecocalipsis es una iniciativa pedagógica nacida en las aulas de la IED Pío X para conectar la tecnología, la inteligencia artificial y el cine ambiental con la protección real de los ecosistemas colombianos, especialmente la cuenca hídrica y los páramos de nuestra región."
+                        font="font:MediumSystemFont"
+                        color="0xE2E8F0FF"
+                        wrap="true"
+                        width="790"
+                        translation="[35, 80]"
+                    />
+
+                    <Rectangle color="0x10B9814D" width="790" height="2" translation="[35, 230]" />
+
+                    <Label text="🎯 PILARES PEDAGÓGICOS EN ROKU TV:" font="font:SmallBoldSystemFont" color="0x34D399FF" translation="[35, 255]" />
+                    <Label
+                        text="1. Cine-Foros y Talleres Audiovisuales interactivos en pantalla gigante para clases y familias.\n2. Gamificación del código de separación de residuos (Res. 2184).\n3. Consultas ecológicas en tiempo real mediante Inteligencia Artificial.\n4. Medición comunitaria de huella de carbono y ahorro de agua."
+                        font="font:MediumSystemFont"
+                        color="0xCBD5E1FF"
+                        wrap="true"
+                        width="790"
+                        translation="[35, 300]"
+                    />
+                </Group>
+
+                <!-- Right Card: Contact & Certification Readiness -->
+                <Group translation="[900, 0]">
+                    <Rectangle color="0x064E3BCC" width="860" height="610" />
+                    <Label text="ℹ️ DETALLES DEL CANAL ROKU &amp; COMUNIDAD" font="font:MediumBoldSystemFont" color="0x38BDF8FF" translation="[35, 30]" />
+
+                    <Label
+                        text="• Versión del Canal: 1.0.100 (Roku OS FHD &amp; HD compatible)\n• Soporte Remoto: Navegación nativa D-Pad, OK y Back\n• Sede: Chipaque - Cundinamarca, Colombia\n• Audiencia: Comunidad Educativa IED Pío X y público general\n• Desarrollado para: Televisores de salones, bibliotecas y hogares"
+                        font="font:MediumSystemFont"
+                        color="0xE2E8F0FF"
+                        wrap="true"
+                        width="790"
+                        translation="[35, 80]"
+                    />
+
+                    <Rectangle color="0x10B9814D" width="790" height="2" translation="[35, 260]" />
+
+                    <Label text="🌳 COMPROMISO CON EL MEDIO AMBIENTE:" font="font:SmallBoldSystemFont" color="0xFDE047FF" translation="[35, 285]" />
+                    <Label
+                        text="'Cuidar la Tierra no es una tarea del futuro, es el deber de hoy en cada salón y en cada hogar.'\n\n© 2026 IED Pío X · Todos los derechos reservados."
+                        font="font:MediumSystemFont"
+                        color="0x94A3B8FF"
+                        wrap="true"
+                        width="790"
+                        translation="[35, 330]"
+                    />
+                </Group>
+            </Group>
+        </Group>
+    </children>
+</component>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="EcoIAScreen" extends="Group">
+    <script type="text/brightscript" uri="pkg:/components/EcoIAScreen.brs" />
+
+    <children>
+        <Group translation="[0, 0]">
+            <!-- Header -->
+            <Group translation="[0, 0]">
+                <Label
+                    text="🤖 ECO-IA: CONSEJERO ECOLÓGICO INTELIGENTE"
+                    font="font:LargeBoldSystemFont"
+                    color="0x34D399FF"
+                    translation="[0, 0]"
+                />
+                <Label
+                    text="Selecciona una pregunta con las flechas ▲ ▼ y presiona OK para recibir una respuesta ecológica al instante."
+                    font="font:SmallSystemFont"
+                    color="0x94A3B8FF"
+                    translation="[0, 40]"
+                />
+            </Group>
+
+            <!-- Main Content Container: Left Questions / Right AI Speech Bubble -->
+            <Group translation="[0, 90]">
+                <!-- Left: Question Quick Buttons -->
+                <ButtonGroup
+                    id="questionsList"
+                    layoutDirection="vert"
+                    itemSpacings="[14]"
+                    translation="[0, 0]"
+                >
+                    <Button id="q1" text="♻️ ¿Cómo reciclar en la IED Pío X?" minWidth="650" height="60" />
+                    <Button id="q2" text="💧 ¿Por qué proteger el Páramo de Sumapaz?" minWidth="650" height="60" />
+                    <Button id="q3" text="🌳 ¿Qué gran lección nos enseña El Lorax?" minWidth="650" height="60" />
+                    <Button id="q4" text="⚡ ¿Cómo eliminar los vampiros eléctricos?" minWidth="650" height="60" />
+                    <Button id="q5" text="🛢️ ¿Qué hacemos con el aceite de cocina?" minWidth="650" height="60" />
+                    <Button id="q6" text="🚿 ¿Cómo ahorrar 100 litros de agua al día?" minWidth="650" height="60" />
+                </ButtonGroup>
+
+                <!-- Right: AI Speech Bubble & Answer Area -->
+                <Group id="responseCard" translation="[700, 0]">
+                    <Rectangle
+                        color="0x064E3BEE"
+                        width="1060"
+                        height="620"
+                        translation="[0, 0]"
+                    />
+
+                    <!-- Status / Question Header -->
+                    <Label
+                        id="aiQueryHeader"
+                        text="PREGUNTA: ¿Cómo reciclar en la IED Pío X?"
+                        font="font:MediumBoldSystemFont"
+                        color="0xFDE047FF"
+                        wrap="true"
+                        width="980"
+                        translation="[40, 35]"
+                    />
+
+                    <!-- Divider -->
+                    <Rectangle
+                        color="0x10B9814D"
+                        width="980"
+                        height="2"
+                        translation="[40, 95]"
+                    />
+
+                    <!-- AI Response Text Body -->
+                    <Label
+                        id="aiResponseText"
+                        text="🌱 ¡Hola! Soy EcoIA en tu televisor. Selecciona una pregunta a la izquierda para consultarme sobre reciclaje, agua o reforestación."
+                        font="font:MediumSystemFont"
+                        color="0xFFFFFFFF"
+                        wrap="true"
+                        width="980"
+                        translation="[40, 120]"
+                    />
+
+                    <!-- Loading Indicator -->
+                    <Group id="aiLoadingGroup" translation="[400, 260]" visible="false">
+                        <Rectangle
+                            color="0x022C22F5"
+                            width="300"
+                            height="90"
+                        />
+                        <Label
+                            text="⏳ EcoIA pensando..."
+                            font="font:MediumBoldSystemFont"
+                            color="0x34D399FF"
+                            horizAlign="center"
+                            width="300"
+                            translation="[0, 30]"
+                        />
+                    </Group>
+
+                    <!-- Footer note -->
+                    <Label
+                        text="IED Pío X · Inteligencia Artificial Ecológica Educativa"
+                        font="font:SmallSystemFont"
+                        color="0x6EE7B788"
+                        translation="[40, 565]"
+                    />
+                </Group>
+            </Group>
+        </Group>
+    </children>
+</component>

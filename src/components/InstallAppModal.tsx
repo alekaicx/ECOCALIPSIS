@@ -103,7 +103,7 @@ export const InstallAppModal: React.FC<InstallAppModalProps> = ({ isOpen, onClos
             </h2>
           </div>
 
-          {/* Main Action Button */}
+            {/* Main Action Button */}
           <div className="space-y-3">
             {isInstalled ? (
               <div className="flex items-center justify-center gap-2 p-3.5 bg-[#00ff88]/15 border border-[#00ff88]/40 rounded-2xl text-[#00ff88] font-bold text-sm">
@@ -118,9 +118,19 @@ export const InstallAppModal: React.FC<InstallAppModalProps> = ({ isOpen, onClos
                 className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#00ff88] via-emerald-400 to-teal-300 text-slate-950 font-black text-base shadow-[0_0_25px_rgba(0,255,136,0.5)] hover:shadow-[0_0_35px_rgba(0,255,136,0.8)] transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 <Download className="w-5 h-5 stroke-[2.5]" />
-                Instalar ahora
+                Instalar ahora (Web / PWA)
               </motion.button>
             )}
+
+            {/* Direct Roku TV Zip Download Button */}
+            <a
+              href="/ecocalipsis_roku_channel.zip"
+              download="ecocalipsis_roku_channel.zip"
+              className="w-full py-3 px-4 rounded-2xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white hover:bg-emerald-900/90 font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-sm"
+            >
+              <Download className="w-4 h-4 text-[#00ff88]" />
+              Descargar Paquete ZIP para Roku TV (.zip)
+            </a>
 
             <button
               onClick={onClose}

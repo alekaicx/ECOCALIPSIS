@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="WorkshopsScreen" extends="Group">
+    <interface>
+        <field id="playVideoRequested" type="assocarray" alwaysNotify="true" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/WorkshopsScreen.brs" />
+
+    <children>
+        <!-- Title & Instruction Header -->
+        <Group translation="[0, 0]">
+            <Label
+                text="🎬 TALLERES AUDIOVISUALES &amp; CINE-FOROS"
+                font="font:LargeBoldSystemFont"
+                color="0x34D399FF"
+                translation="[0, 0]"
+            />
+            <Label
+                text="Selecciona un taller con las flechas ▲ ▼ y presiona OK en 'Ver Video' para comenzar la sesión en tu TV."
+                font="font:SmallSystemFont"
+                color="0x94A3B8FF"
+                translation="[0, 42]"
+            />
+        </Group>
+
+        <!-- Main Split View: Left List / Right Details -->
+        <Group translation="[0, 90]">
+            <!-- Left Side: Workshop Selector Buttons -->
+            <ButtonGroup
+                id="workshopList"
+                layoutDirection="vert"
+                itemSpacings="[18]"
+                translation="[0, 0]"
+            >
+                <Button id="ws1" text="🌳 1. Cine-Foro: El Lorax y la Deforestación" minWidth="650" height="65" />
+                <Button id="ws2" text="💧 2. Guardianes del Sumapaz (El Agua)" minWidth="650" height="65" />
+                <Button id="ws3" text="♻️ 3. Código de Colores: Reciclaje Escolar" minWidth="650" height="65" />
+                <Button id="ws4" text="⚡ 4. Energía Limpia: Cero Vampiros" minWidth="650" height="65" />
+            </ButtonGroup>
+
+            <!-- Right Side: Detailed Card -->
+            <Group id="detailCard" translation="[700, 0]">
+                <Rectangle
+                    color="0x064E3BCC"
+                    width="1060"
+                    height="700"
+                    translation="[0, 0]"
+                />
+
+                <!-- Workshop Image Poster -->
+                <Poster
+                    id="detailPoster"
+                    width="420"
+                    height="240"
+                    translation="[35, 35]"
+                    loadDisplayMode="scaleToZoom"
+                />
+
+                <!-- Metadata block -->
+                <Group translation="[485, 35]">
+                    <Label
+                        id="detailCategory"
+                        text="CINE AMBIENTAL"
+                        font="font:SmallBoldSystemFont"
+                        color="0xFDE047FF"
+                        translation="[0, 0]"
+                    />
+                    <Label
+                        id="detailTitle"
+                        text="El Lorax y la Deforestación"
+                        font="font:LargeBoldSystemFont"
+                        color="0xFFFFFFFF"
+                        wrap="true"
+                        width="540"
+                        translation="[0, 30]"
+                    />
+                    <Label
+                        id="detailMeta"
+                        text="⏱ Duración: 1h 26m · Nivel: Básica y Media"
+                        font="font:SmallSystemFont"
+                        color="0x6EE7B7FF"
+                        translation="[0, 110]"
+                    />
+
+                    <!-- Play Video Button -->
+                    <Button
+                        id="btnPlayCurrent"
+                        text="▶ Reproducir Video en TV (OK)"
+                        minWidth="400"
+                        height="58"
+                        translation="[0, 155]"
+                    />
+                </Group>
+
+                <!-- Divider -->
+                <Rectangle
+                    color="0x10B9814D"
+                    width="990"
+                    height="2"
+                    translation="[35, 300]"
+                />
+
+                <!-- Synopsis and Key Questions -->
+                <Group translation="[35, 320]">
+                    <Label
+                        text="📖 RESUMEN DEL TALLER:"
+                        font="font:SmallBoldSystemFont"
+                        color="0x34D399FF"
+                        translation="[0, 0]"
+                    />
+                    <Label
+                        id="detailDescription"
+                        text="Acompaña al Lorax en esta historia sobre la tala indiscriminada..."
+                        font="font:MediumSystemFont"
+                        color="0xE2E8F0FF"
+                        wrap="true"
+                        width="990"
+                        translation="[0, 30]"
+                    />
+
+                    <Label
+                        text="💡 PREGUNTAS DE REFLEXIÓN PARA TU CLASE O FAMILIA:"
+                        font="font:SmallBoldSystemFont"
+                        color="0xFDE047FF"
+                        translation="[0, 150]"
+                    />
+                    <Label
+                        id="detailQuestions"
+                        text="1. ¿Por qué se destruyó el bosque?\n2. ¿Qué significa 'A MENOS QUE'?"
+                        font="font:MediumSystemFont"
+                        color="0xCBD5E1FF"
+                        wrap="true"
+                        width="990"
+                        translation="[0, 185]"
+                    />
+                </Group>
+            </Group>
+        </Group>
+    </children>
+</component>

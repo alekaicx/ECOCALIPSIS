@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="TriviaScreen" extends="Group">
+    <interface>
+        <field id="scoreAwarded" type="integer" alwaysNotify="true" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/TriviaScreen.brs" />
+
+    <children>
+        <Group translation="[0, 0]">
+            <!-- Header Progress -->
+            <Group translation="[0, 0]">
+                <Label
+                    id="triviaProgressLabel"
+                    text="PREGUNTA 1 DE 5"
+                    font="font:SmallBoldSystemFont"
+                    color="0xFDE047FF"
+                    translation="[0, 0]"
+                />
+                <Label
+                    id="triviaScoreLabel"
+                    text="⭐ Puntos Trivia: 0"
+                    font="font:MediumBoldSystemFont"
+                    color="0x34D399FF"
+                    translation="[1400, 0]"
+                />
+            </Group>
+
+            <!-- Question Card Box -->
+            <Group translation="[0, 50]">
+                <Rectangle
+                    color="0x064E3BCC"
+                    width="1760"
+                    height="200"
+                />
+                <Label
+                    id="questionTextLabel"
+                    text="¿En qué caneca según el código colombiano (Res. 2184) debes depositar una botella plástica limpia?"
+                    font="font:LargeBoldSystemFont"
+                    color="0xFFFFFFFF"
+                    wrap="true"
+                    width="1680"
+                    translation="[40, 45]"
+                />
+            </Group>
+
+            <!-- Options Selector (Vertical Button Group for easy D-Pad control) -->
+            <ButtonGroup
+                id="optionsButtonGroup"
+                layoutDirection="vert"
+                itemSpacings="[16]"
+                translation="[0, 275]"
+            >
+                <Button id="opt0" text="A. Opción 1" minWidth="1760" height="64" />
+                <Button id="opt1" text="B. Opción 2" minWidth="1760" height="64" />
+                <Button id="opt2" text="C. Opción 3" minWidth="1760" height="64" />
+                <Button id="opt3" text="D. Opción 4" minWidth="1760" height="64" />
+            </ButtonGroup>
+
+            <!-- Pedagogical Feedback Card (reveals after selection) -->
+            <Group id="feedbackGroup" translation="[0, 600]" visible="false">
+                <Rectangle
+                    id="feedbackBg"
+                    color="0x022C22F0"
+                    width="1760"
+                    height="120"
+                />
+                <Label
+                    id="feedbackStatusLabel"
+                    text="¡RESPUESTA CORRECTA! (+20 Pts)"
+                    font="font:MediumBoldSystemFont"
+                    color="0x34D399FF"
+                    translation="[40, 20]"
+                />
+                <Label
+                    id="feedbackExplanationLabel"
+                    text="En la caneca blanca van los residuos aprovechables limpios."
+                    font="font:SmallSystemFont"
+                    color="0xE2E8F0FF"
+                    wrap="true"
+                    width="1400"
+                    translation="[40, 60]"
+                />
+                <Button
+                    id="btnNextQuestion"
+                    text="Siguiente Pregunta ▶ (OK)"
+                    minWidth="280"
+                    height="50"
+                    translation="[1440, 35]"
+                />
+            </Group>
+        </Group>
+    </children>
+</component>

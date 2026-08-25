@@ -100,6 +100,11 @@ export default function App() {
         actionId === 'reciclaje_quiz_correct'
       ) {
         badgeIdToUnlock = 'badge-reciclaje';
+      } else if (
+        actionId === 'ecocalipsis_quiz_passed' ||
+        actionId === 'ecocalipsis_quiz_correct'
+      ) {
+        badgeIdToUnlock = 'badge-ecocalipsis';
       }
 
       if (!badgeIdToUnlock) return prev;

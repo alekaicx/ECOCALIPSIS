@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="StatsScreen" extends="Group">
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/StatsScreen.brs" />
+
+    <children>
+        <Group translation="[0, 0]">
+            <!-- Header -->
+            <Label
+                text="📊 TABLERO DE IMPACTO ECOLÓGICO &amp; LOGROS"
+                font="font:LargeBoldSystemFont"
+                color="0x34D399FF"
+                translation="[0, 0]"
+            />
+            <Label
+                text="Registro de acciones sostenibles, huella hídrica y medallas alcanzadas en la IED Pío X."
+                font="font:SmallSystemFont"
+                color="0x94A3B8FF"
+                translation="[0, 40]"
+            />
+
+            <!-- Main Split Grid (Top Metrics / Bottom Badges) -->
+            <Group translation="[0, 85]">
+                <!-- Student Summary Card -->
+                <Group translation="[0, 0]">
+                    <Rectangle color="0x064E3BCC" width="860" height="260" />
+                    <Label text="PERFIL DEL ESTUDIANTE" font="font:SmallBoldSystemFont" color="0xFDE047FF" translation="[35, 25]" />
+                    <Label id="statsProfileName" text="Estudiante Pío X · Grado 6° A" font="font:LargeBoldSystemFont" color="0xFFFFFFFF" translation="[35, 60]" />
+                    <Label id="statsPoints" text="⭐ Puntos Totales: 150 Pts" font="font:MediumBoldSystemFont" color="0x34D399FF" translation="[35, 115]" />
+                    <Label text="Nivel actual: 'Guardián del Páramo' · 2 Talleres Audiovisuales completados" font="font:SmallSystemFont" color="0xCBD5E1FF" translation="[35, 160]" />
+                    <Label text="Presiona OK en los juegos y trivias para sumar más puntos a tu clase." font="font:SmallSystemFont" color="0x6EE7B7FF" translation="[35, 205]" />
+                </Group>
+
+                <!-- School PRAE Collective Impact Card -->
+                <Group translation="[900, 0]">
+                    <Rectangle color="0x064E3BCC" width="860" height="260" />
+                    <Label text="IMPACTO COLECTIVO IED PÍO X" font="font:SmallBoldSystemFont" color="0x38BDF8FF" translation="[35, 25]" />
+                    <Label text="🌿 1,420 Árboles Protegidos en Sumapaz" font="font:MediumBoldSystemFont" color="0xFFFFFFFF" translation="[35, 65]" />
+                    <Label text="💧 85,000 Litros de Agua Ahorrados en Sedes" font="font:MediumBoldSystemFont" color="0xFFFFFFFF" translation="[35, 110]" />
+                    <Label text="♻️ 3.2 Toneladas de Residuos Clasificados" font="font:MediumBoldSystemFont" color="0xFFFFFFFF" translation="[35, 155]" />
+                    <Label text="⚡ -18% de Consumo Eléctrico Fantasma Reportado" font="font:SmallSystemFont" color="0xFDE047FF" translation="[35, 205]" />
+                </Group>
+            </Group>
+
+            <!-- Bottom Badges / Medals Showcase -->
+            <Group translation="[0, 380]">
+                <Rectangle color="0x064E3B99" width="1760" height="320" />
+                <Label text="🏅 GALERÍA DE INSIGNIAS ECOLÓGICAS" font="font:MediumBoldSystemFont" color="0xFDE047FF" translation="[35, 25]" />
+
+                <!-- Badge 1 -->
+                <Group translation="[35, 75]">
+                    <Rectangle color="0x022C22EE" width="395" height="210" />
+                    <Label text="🌱" font="font:LargeBoldSystemFont" horizAlign="center" width="395" translation="[0, 15]" />
+                    <Label text="Semilla Verde" font="font:MediumBoldSystemFont" color="0x34D399FF" horizAlign="center" width="395" translation="[0, 75]" />
+                    <Label text="Completaste tu primer taller ambiental en la app." font="font:SmallSystemFont" color="0x94A3B8FF" wrap="true" width="350" translation="[25, 125]" />
+                </Group>
+
+                <!-- Badge 2 -->
+                <Group translation="[470, 75]">
+                    <Rectangle color="0x022C22EE" width="395" height="210" />
+                    <Label text="💧" font="font:LargeBoldSystemFont" horizAlign="center" width="395" translation="[0, 15]" />
+                    <Label text="Guardián de Sumapaz" font="font:MediumBoldSystemFont" color="0x38BDF8FF" horizAlign="center" width="395" translation="[0, 75]" />
+                    <Label text="Acertaste el cuidado del páramo en la Eco-Trivia." font="font:SmallSystemFont" color="0x94A3B8FF" wrap="true" width="350" translation="[25, 125]" />
+                </Group>
+
+                <!-- Badge 3 -->
+                <Group translation="[905, 75]">
+                    <Rectangle color="0x022C22EE" width="395" height="210" />
+                    <Label text="♻️" font="font:LargeBoldSystemFont" horizAlign="center" width="395" translation="[0, 15]" />
+                    <Label text="Maestro del Reciclaje" font="font:MediumBoldSystemFont" color="0xFACC15FF" horizAlign="center" width="395" translation="[0, 75]" />
+                    <Label text="Superaste 100 puntos en el juego de canecas." font="font:SmallSystemFont" color="0x94A3B8FF" wrap="true" width="350" translation="[25, 125]" />
+                </Group>
+
+                <!-- Badge 4 -->
+                <Group translation="[1340, 75]">
+                    <Rectangle color="0x022C22EE" width="385" height="210" />
+                    <Label text="🌳" font="font:LargeBoldSystemFont" horizAlign="center" width="385" translation="[0, 15]" />
+                    <Label text="Defensor de Truffula" font="font:MediumBoldSystemFont" color="0xF472B6FF" horizAlign="center" width="385" translation="[0, 75]" />
+                    <Label text="Viste el Cine-Foro de El Lorax en pantalla grande." font="font:SmallSystemFont" color="0x94A3B8FF" wrap="true" width="340" translation="[25, 125]" />
+                </Group>
+            </Group>
+        </Group>
+    </children>
+</component>

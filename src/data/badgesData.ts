@@ -31,6 +31,14 @@ export const THREE_BADGES: BadgeItem[] = [
     description: 'Otorgada por completar y responder correctamente la evaluación del Taller de El Reciclaje.',
     icon: 'https://i.ibb.co/Mx8yc33z/images-removebg-preview-6.png',
     unlockCondition: 'Aprueba el cuestionario del Taller de El Reciclaje respondiendo todas las preguntas de forma correcta'
+  },
+  {
+    id: 'badge-ecocalipsis',
+    name: 'Insignia Oficial Ecocalipsis 🌎',
+    category: 'biodiversidad',
+    description: 'Otorgada por completar y responder correctamente la evaluación de la Capacitación Ecocalipsis.',
+    icon: 'https://i.ibb.co/vx4nhDRR/Chat-GPT-Image-28-jul-2026-18-13-59-removebg-preview.png',
+    unlockCondition: 'Aprueba el cuestionario de la Capacitación Ecocalipsis respondiendo todas las preguntas de forma correcta'
   }
 ];
 

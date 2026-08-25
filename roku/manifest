@@ -1,0 +1,17 @@
+# Channel Details
+title=Ecocalipsis
+major_version=1
+minor_version=0
+build_version=100
+
+# Channel Assets (Required)
+mm_icon_focus_hd=pkg:/images/channel_icon_hd.png
+mm_icon_focus_fhd=pkg:/images/channel_icon_fhd.png
+splash_screen_hd=pkg:/images/splash_hd.png
+splash_screen_fhd=pkg:/images/splash_fhd.png
+splash_color=#0a1a12
+splash_min_time=1500
+
+# Display Configuration
+ui_resolutions=fhd,hd
+rsg_version=1.2

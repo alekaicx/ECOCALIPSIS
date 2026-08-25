@@ -33,6 +33,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
+import { EcocalipsisWorkshopPresentation, ECOCALIPSIS_PRESENTATION_QUIZ } from './EcocalipsisWorkshopPresentation';
 
 interface WorkshopsProps {
   student: StudentProfile;
@@ -120,6 +121,12 @@ export const Workshops: React.FC<WorkshopsProps> = ({
     setUserAnswers(updated);
   };
 
+  const handleResetQuiz = () => {
+    setQuizSubmitted(false);
+    setUserAnswers([]);
+    setQuizScore(0);
+  };
+
   const handleFinishQuiz = () => {
     if (!selectedWorkshop) return;
     let correctCount = 0;
@@ -140,14 +147,16 @@ export const Workshops: React.FC<WorkshopsProps> = ({
       }));
       if (selectedWorkshop.id === 'ws-reciclaje') {
         onTriggerBadgeAction?.('reciclaje_quiz_passed');
+      } else if (selectedWorkshop.id === 'ws-ecocalipsis') {
+        onTriggerBadgeAction?.('ecocalipsis_quiz_passed');
       } else {
         onTriggerBadgeAction?.('biodiversity_quiz_correct');
       }
     }
   };
 
-  const slidesCount = selectedWorkshop?.id === 'ws-reciclaje' ? 9 : 8;
-  const quizSlideIndex = selectedWorkshop?.id === 'ws-reciclaje' ? 8 : 7;
+  const slidesCount = selectedWorkshop?.id === 'ws-ecocalipsis' ? 15 : selectedWorkshop?.id === 'ws-reciclaje' ? 9 : 8;
+  const quizSlideIndex = selectedWorkshop?.id === 'ws-ecocalipsis' ? 14 : selectedWorkshop?.id === 'ws-reciclaje' ? 8 : 7;
 
   return (
     <div className="space-y-6 max-w-2xl mx-auto py-2">
@@ -170,6 +179,13 @@ export const Workshops: React.FC<WorkshopsProps> = ({
         {WORKSHOP_MODULES.map((ws) => {
           const isCompleted = student.completedWorkshops.includes(ws.id);
           const isReciclaje = ws.id === 'ws-reciclaje';
+          const isEcocalipsis = ws.id === 'ws-ecocalipsis';
+          const cardImg = isEcocalipsis 
+            ? "https://i.ibb.co/vx4nhDRR/Chat-GPT-Image-28-jul-2026-18-13-59-removebg-preview.png"
+            : isReciclaje 
+              ? "https://i.ibb.co/Mx8yc33z/images-removebg-preview-6.png" 
+              : "https://i.ibb.co/dwZmXvkD/Stickers-for-Sale-removebg-preview.png";
+
           return (
             <motion.div
               key={ws.id}
@@ -183,7 +199,7 @@ export const Workshops: React.FC<WorkshopsProps> = ({
               <div className="flex items-center justify-between gap-3 relative z-10">
                 <div className="flex items-center gap-4">
                   <motion.img 
-                    src={isReciclaje ? "https://i.ibb.co/Mx8yc33z/images-removebg-preview-6.png" : "https://i.ibb.co/dwZmXvkD/Stickers-for-Sale-removebg-preview.png"} 
+                    src={cardImg} 
                     alt={ws.title} 
                     animate={{ y: [0, -6, 0], rotate: [0, 3, -3, 0] }}
                     transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
@@ -191,9 +207,14 @@ export const Workshops: React.FC<WorkshopsProps> = ({
                     referrerPolicy="no-referrer"
                   />
                   <div>
-                    {!isReciclaje && ws.level && ws.duration && (
+                    {!isReciclaje && !isEcocalipsis && ws.level && ws.duration && (
                       <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-emerald-500/20 text-[#00ff88] border border-[#00ff88]/30">
                         {ws.level} • {ws.duration}
+                      </span>
+                    )}
+                    {isEcocalipsis && (
+                      <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase bg-emerald-500/20 text-[#00ff88] border border-[#00ff88]/30">
+                        Presentación Oficial • 14 Diapositivas
                       </span>
                     )}
                     <h3 className="text-xl sm:text-2xl font-black text-amber-100 tracking-tight mt-1">
@@ -253,68 +274,83 @@ export const Workshops: React.FC<WorkshopsProps> = ({
 
               {/* Slides Content - Spacious & Scrollable */}
               <div className="space-y-6 pb-8 flex-1">
-                {/* Slide 0: Clean Expanded Movie / Video Presentation */}
-                {currentSlide === 0 && (
-                  selectedWorkshop.id === 'ws-reciclaje' ? (
-                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6 max-w-4xl sm:max-w-5xl mx-auto text-center flex flex-col items-center">
-                      <div className="space-y-3 max-w-2xl mx-auto text-center">
-                        <h4 className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 via-[#00ff88] to-teal-200 tracking-tight drop-shadow-md">
-                          El Reciclaje
-                        </h4>
-                        <p className="text-sm sm:text-lg font-semibold text-emerald-100/90 max-w-xl mx-auto leading-relaxed tracking-wide">
-                          Aprende el ciclo de transformación de los materiales, cómo separar adecuadamente y proteger nuestro planeta.
-                        </p>
-                      </div>
+                {/* ECOCALIPSIS WORKSHOP PRESENTATION (ws-ecocalipsis) */}
+                {selectedWorkshop.id === 'ws-ecocalipsis' ? (
+                  <EcocalipsisWorkshopPresentation
+                    currentSlide={currentSlide}
+                    setCurrentSlide={setCurrentSlide}
+                    onFinishQuiz={handleFinishQuiz}
+                    quizSubmitted={quizSubmitted}
+                    quizScore={quizScore}
+                    userAnswers={userAnswers}
+                    handleAnswerSelect={handleAnswerSelect}
+                    onResetQuiz={handleResetQuiz}
+                    onClose={() => setSelectedWorkshop(null)}
+                  />
+                ) : (
+                  <>
+                    {/* Slide 0: Clean Expanded Movie / Video Presentation */}
+                    {currentSlide === 0 && (
+                      selectedWorkshop.id === 'ws-reciclaje' ? (
+                        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6 max-w-4xl sm:max-w-5xl mx-auto text-center flex flex-col items-center">
+                          <div className="space-y-3 max-w-2xl mx-auto text-center">
+                            <h4 className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 via-[#00ff88] to-teal-200 tracking-tight drop-shadow-md">
+                              El Reciclaje
+                            </h4>
+                            <p className="text-sm sm:text-lg font-semibold text-emerald-100/90 max-w-xl mx-auto leading-relaxed tracking-wide">
+                              Aprende el ciclo de transformación de los materiales, cómo separar adecuadamente y proteger nuestro planeta.
+                            </p>
+                          </div>
 
-                      {/* Embedded YouTube Video Container */}
-                      <div className="relative aspect-video w-full max-w-4xl overflow-hidden rounded-3xl border-2 border-[#00ff88]/80 shadow-[0_20px_50px_rgba(0,255,136,0.25)] bg-black/90 group">
-                        <iframe
-                          className="w-full h-full"
-                          src="https://www.youtube.com/embed/VXPLOq92kHI"
-                          title="El Reciclaje"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                        ></iframe>
-                      </div>
+                          {/* Embedded YouTube Video Container */}
+                          <div className="relative aspect-video w-full max-w-4xl overflow-hidden rounded-3xl border-2 border-[#00ff88]/80 shadow-[0_20px_50px_rgba(0,255,136,0.25)] bg-black/90 group">
+                            <iframe
+                              className="w-full h-full"
+                              src="https://www.youtube.com/embed/VXPLOq92kHI"
+                              title="El Reciclaje"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                            ></iframe>
+                          </div>
 
-                      <div className="pt-2">
-                        <p className="text-base sm:text-xl font-extrabold text-[#00ff88] tracking-wide inline-flex items-center gap-2 drop-shadow-md">
-                          Pon atención, toma apuntes y disfruta
-                        </p>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6 max-w-4xl sm:max-w-5xl mx-auto text-center flex flex-col items-center">
-                      <div className="space-y-3 max-w-2xl mx-auto text-center">
-                        <h4 className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-200 tracking-tight drop-shadow-md">
-                          El Lorax
-                        </h4>
-                        <p className="text-sm sm:text-lg font-semibold text-amber-100/90 max-w-xl mx-auto leading-relaxed tracking-wide">
-                          "Hablo por los árboles, ya que los árboles no tienen lenguas." ¡Disfruta la película y descubre la magia de la naturaleza!
-                        </p>
-                      </div>
+                          <div className="pt-2">
+                            <p className="text-base sm:text-xl font-extrabold text-[#00ff88] tracking-wide inline-flex items-center gap-2 drop-shadow-md">
+                              Pon atención, toma apuntes y disfruta
+                            </p>
+                          </div>
+                        </motion.div>
+                      ) : (
+                        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6 max-w-4xl sm:max-w-5xl mx-auto text-center flex flex-col items-center">
+                          <div className="space-y-3 max-w-2xl mx-auto text-center">
+                            <h4 className="text-4xl sm:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-200 tracking-tight drop-shadow-md">
+                              El Lorax
+                            </h4>
+                            <p className="text-sm sm:text-lg font-semibold text-amber-100/90 max-w-xl mx-auto leading-relaxed tracking-wide">
+                              "Hablo por los árboles, ya que los árboles no tienen lenguas." ¡Disfruta la película y descubre la magia de la naturaleza!
+                            </p>
+                          </div>
 
-                      {/* Embedded OK.ru Video Player */}
-                      <div className="relative aspect-video w-full max-w-4xl overflow-hidden rounded-3xl border-2 border-amber-400/80 shadow-[0_20px_50px_rgba(245,158,11,0.3)] bg-black">
-                        <iframe
-                          className="w-full h-full"
-                          src="https://ok.ru/videoembed/7461508024964?nochat=1&hd=1"
-                          title="El Lorax"
-                          frameBorder="0"
-                          allow="autoplay; encrypted-media; fullscreen"
-                          allowFullScreen
-                        ></iframe>
-                      </div>
+                          {/* Embedded OK.ru Video Player */}
+                          <div className="relative aspect-video w-full max-w-4xl overflow-hidden rounded-3xl border-2 border-amber-400/80 shadow-[0_20px_50px_rgba(245,158,11,0.3)] bg-black">
+                            <iframe
+                              className="w-full h-full"
+                              src="https://ok.ru/videoembed/7461508024964?nochat=1&hd=1"
+                              title="El Lorax"
+                              frameBorder="0"
+                              allow="autoplay; encrypted-media; fullscreen"
+                              allowFullScreen
+                            ></iframe>
+                          </div>
 
-                      {/* Message below the movie */}
-                      <div className="pt-2">
-                        <p className="text-base sm:text-xl font-extrabold text-amber-300 tracking-wide inline-flex items-center gap-2 drop-shadow-md">
-                          Pon atención, toma apuntes y disfruta
-                        </p>
-                      </div>
-                    </motion.div>
-                  )
-                )}
+                          {/* Message below the movie */}
+                          <div className="pt-2">
+                            <p className="text-base sm:text-xl font-extrabold text-amber-300 tracking-wide inline-flex items-center gap-2 drop-shadow-md">
+                              Pon atención, toma apuntes y disfruta
+                            </p>
+                          </div>
+                        </motion.div>
+                      )
+                    )}
 
                 {/* ==================== EL RECICLAJE SLIDES (ws-reciclaje) ==================== */}
                 {/* Reciclaje Slide 1: 🟢 1. Separar los residuos */}
@@ -1876,17 +1912,19 @@ export const Workshops: React.FC<WorkshopsProps> = ({
                     )}
                   </motion.div>
                 )}
+                </>
+              )}
 
               </div>
 
               {/* Navigation Footer - Single Unified Navigation Bar */}
               <div className="flex items-center justify-between border-t border-[#00ff88]/20 pt-4 mt-8">
                 <button
-                  disabled={currentSlide === 0 && (selectedWorkshop.id === 'ws-reciclaje' || colombiaStep === 0)}
+                  disabled={currentSlide === 0 && (selectedWorkshop.id === 'ws-ecocalipsis' || selectedWorkshop.id === 'ws-reciclaje' || colombiaStep === 0)}
                   onClick={() => {
-                    if (selectedWorkshop.id !== 'ws-reciclaje' && currentSlide === 1 && reflectionAudience === 'youth' && activeYouthTab > 0) {
+                    if (selectedWorkshop.id !== 'ws-reciclaje' && selectedWorkshop.id !== 'ws-ecocalipsis' && currentSlide === 1 && reflectionAudience === 'youth' && activeYouthTab > 0) {
                       setActiveYouthTab((prev) => prev - 1);
-                    } else if (selectedWorkshop.id !== 'ws-reciclaje' && currentSlide === 2 && colombiaStep > 0) {
+                    } else if (selectedWorkshop.id !== 'ws-reciclaje' && selectedWorkshop.id !== 'ws-ecocalipsis' && currentSlide === 2 && colombiaStep > 0) {
                       setColombiaStep((prev) => prev - 1);
                     } else {
                       setCurrentSlide((prev) => Math.max(0, prev - 1));
@@ -1899,7 +1937,7 @@ export const Workshops: React.FC<WorkshopsProps> = ({
 
                 {/* Step Indicator Dots */}
                 <div className="hidden sm:flex items-center gap-1.5">
-                  {selectedWorkshop.id !== 'ws-reciclaje' && currentSlide === 1 && reflectionAudience === 'youth' ? (
+                  {selectedWorkshop.id !== 'ws-reciclaje' && selectedWorkshop.id !== 'ws-ecocalipsis' && currentSlide === 1 && reflectionAudience === 'youth' ? (
                     [0, 1, 2, 3, 4].map((stepIdx) => (
                       <button
                         key={stepIdx}
@@ -1935,7 +1973,7 @@ export const Workshops: React.FC<WorkshopsProps> = ({
                 {currentSlide < slidesCount - 1 && (
                   <button
                     onClick={() => {
-                      if (selectedWorkshop.id !== 'ws-reciclaje' && currentSlide === 1 && reflectionAudience === 'youth') {
+                      if (selectedWorkshop.id !== 'ws-reciclaje' && selectedWorkshop.id !== 'ws-ecocalipsis' && currentSlide === 1 && reflectionAudience === 'youth') {
                         if (activeYouthTab < 4) {
                           setActiveYouthTab((prev) => prev + 1);
                           confetti({ particleCount: 25, spread: 40 });
@@ -1943,7 +1981,7 @@ export const Workshops: React.FC<WorkshopsProps> = ({
                           // Section finished - return to start
                           handleFinishAndReturnToStart();
                         }
-                      } else if (selectedWorkshop.id !== 'ws-reciclaje' && currentSlide === 2 && colombiaStep < 3) {
+                      } else if (selectedWorkshop.id !== 'ws-reciclaje' && selectedWorkshop.id !== 'ws-ecocalipsis' && currentSlide === 2 && colombiaStep < 3) {
                         setColombiaStep((prev) => prev + 1);
                         confetti({ particleCount: 30, spread: 50, origin: { y: 0.6 } });
                       } else {
@@ -1953,7 +1991,7 @@ export const Workshops: React.FC<WorkshopsProps> = ({
                     className="px-5 sm:px-6 py-2.5 rounded-full bg-[#00ff88] hover:bg-[#2effa0] text-slate-950 font-black text-xs sm:text-sm transition-all shadow-lg shadow-[#00ff88]/20 flex items-center gap-1.5 cursor-pointer shrink-0"
                   >
                     <span>
-                      {selectedWorkshop.id !== 'ws-reciclaje' && currentSlide === 1 && reflectionAudience === 'youth' && activeYouthTab === 4
+                      {selectedWorkshop.id !== 'ws-reciclaje' && selectedWorkshop.id !== 'ws-ecocalipsis' && currentSlide === 1 && reflectionAudience === 'youth' && activeYouthTab === 4
                         ? 'Sección Finalizada ✨'
                         : 'Siguiente'}
                     </span>

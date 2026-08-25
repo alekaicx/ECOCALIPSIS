@@ -203,6 +203,14 @@ export const INITIAL_STUDENT_PROFILE: StudentProfile = {
       icon: 'https://i.ibb.co/Mx8yc33z/images-removebg-preview-6.png',
       unlocked: false,
       requiredXP: 250
+    },
+    {
+      id: 'badge-ecocalipsis',
+      name: 'Insignia Oficial Ecocalipsis 🌎',
+      description: 'Otorgada por completar y responder correctamente la evaluación de la Capacitación Ecocalipsis.',
+      icon: 'https://i.ibb.co/vx4nhDRR/Chat-GPT-Image-28-jul-2026-18-13-59-removebg-preview.png',
+      unlocked: false,
+      requiredXP: 250
     }
   ]
 };
@@ -350,6 +358,65 @@ export const WORKSHOP_MODULES: WorkshopModule[] = [
         ],
         correctIndex: 1,
         explanation: '¡Correcto! Las personas compran y usan esos productos sostenibles y el ciclo vuelve a empezar para proteger el planeta.'
+      }
+    ]
+  },
+  {
+    id: 'ws-ecocalipsis',
+    title: 'Ecocalipsis',
+    duration: '',
+    level: '',
+    summary: '',
+    icon: '🌎',
+    content: [
+      '🌎 Portada: ECOCALIPSIS - "Somos la última generación que puede salvar el planeta". Proyecto de educación ambiental en la IED Pío X para tercer grado.',
+      '🌱 ¿Qué es Ecocalipsis?: Educación ambiental mediante juegos, actividades, experiencias y participación activa para formar hábitos sostenibles.',
+      '⚠️ El Problema: Muchas veces el conocimiento ambiental se queda en la teoría. Nuestro reto es transformar el conocimiento en acciones cotidianas.',
+      '🎯 Nuestro Objetivo: Fomentar conciencia ambiental, hábitos sostenibles, responsabilidad, sentido de pertenencia y acción en colegio y hogares.',
+      '🎯 Misión: Juegos interactivos, recursos audiovisuales, actividades pedagógicas, experiencias prácticas y participación activa.',
+      '🔭 Visión 2026: Que los estudiantes comprendan que las pequeñas acciones generan grandes cambios y sean líderes ambientales.',
+      '🌱 Filosofía: No queremos que los niños solo memoricen. Queremos que apliquen. En Ecocalipsis, aprender significa actuar.',
+      '🎮 Metodología: Aprender haciendo mediante juegos, videos, personajes, arte, experiencias y trabajo en equipo.',
+      '🌎 Misiones: 1. Separación de residuos, 2. Cuidado del agua, 3. Reforestación y plantas, 4. Fauna y flora.',
+      '🌟 Experiencias: Actividades dinámicas y prácticas para aplicar inmediatamente lo aprendido.',
+      '🚀 Conocimiento a la acción: CONOCER ➔ COMPRENDER ➔ SENTIR ➔ ACTUAR.',
+      '🎒 ¿Por qué Tercero?: La infancia es fundamental para formar valores y ser replicadores en sus hogares y comunidad.',
+      '🌟 Impacto: Mejor manejo de residuos, ahorro de agua, respeto por las plantas y cultura ambiental duradera.',
+      '🌎 Mensaje Final: Pequeñas acciones hoy, grandes cambios mañana.'
+    ],
+    quiz: [
+      {
+        question: '¿Cuál es el lema principal y la misión del proyecto Ecocalipsis?',
+        options: [
+          'Memorizar libros y teorías científicas difíciles',
+          '“Somos la última generación que puede salvar el planeta” y transformar el conocimiento en acciones',
+          'Construir fábricas e industrias gigantes en los bosques',
+          'Tirar los residuos en cualquier lugar del colegio'
+        ],
+        correctIndex: 1,
+        explanation: '¡Excelente! En Ecocalipsis creemos que las pequeñas acciones de hoy generan grandes cambios y que aprender significa actuar.'
+      },
+      {
+        question: 'En la filosofía de Ecocalipsis, ¿qué significa "Aprender haciendo"?',
+        options: [
+          'Solo escuchar charlas largas sin participar',
+          'Cerrar la llave, separar residuos, sembrar plantas y aplicar buenos hábitos en el colegio y el hogar',
+          'Aprender únicamente para los exámenes y luego olvidarlo',
+          'No cuidar los recursos naturales'
+        ],
+        correctIndex: 1,
+        explanation: '¡Muy bien! No buscamos que los niños solo memoricen, sino que apliquen hábitos sostenibles todos los días.'
+      },
+      {
+        question: '¿Por qué el proyecto está enfocado principalmente en los estudiantes de tercer grado de la IED Pío X?',
+        options: [
+          'Porque en la infancia se forman los hábitos, valores y se convierten en pequeños líderes y agentes de cambio',
+          'Porque es el único grado que existe en la institución',
+          'Porque no les gusta jugar ni aprender',
+          'Porque no pueden enseñar a sus familias'
+        ],
+        correctIndex: 0,
+        explanation: '¡Correcto! Los niños son el presente y el futuro: un niño que aprende a cuidar puede inspirar y transformar a toda su familia y comunidad.'
       }
     ]
   }

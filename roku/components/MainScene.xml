@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="MainScene" extends="Scene">
+    <script type="text/brightscript" uri="pkg:/source/utils.brs" />
+    <script type="text/brightscript" uri="pkg:/components/MainScene.brs" />
+
+    <children>
+        <!-- Background Wallpaper with Atmospheric Forest Tint -->
+        <Poster
+            id="bgPoster"
+            uri="https://images.unsplash.com/photo-1511497584788-87676104235f?w=1920&amp;auto=format&amp;fit=crop&amp;q=80"
+            translation="[0, 0]"
+            width="1920"
+            height="1080"
+            loadDisplayMode="scaleToFill"
+        />
+
+        <!-- Deep Dark Overlay for 10-foot Readability and Contrast -->
+        <Rectangle
+            id="bgOverlay"
+            color="0x06140CE6"
+            translation="[0, 0]"
+            width="1920"
+            height="1080"
+        />
+
+        <!-- Top Header Bar -->
+        <Group id="headerGroup" translation="[80, 45]">
+            <!-- App Logo / Title -->
+            <Label
+                id="appTitle"
+                text="🌱 ECOCALIPSIS"
+                font="font:LargeBoldSystemFont"
+                color="0x34D399FF"
+                translation="[0, 0]"
+            />
+            <Label
+                id="appSubtitle"
+                text="IED PÍO X · CULTURA AMBIENTAL"
+                font="font:SmallSystemFont"
+                color="0x94A3B8FF"
+                translation="[0, 48]"
+            />
+
+            <!-- Top Navigation Tab Bar -->
+            <ButtonGroup
+                id="topNavBar"
+                layoutDirection="horiz"
+                itemSpacings="[18]"
+                translation="[420, 10]"
+                minWidth="100"
+            >
+                <Button id="navHome" text="🏠 Inicio" minWidth="130" height="50" />
+                <Button id="navWorkshops" text="🎬 Cine &amp; Talleres" minWidth="190" height="50" />
+                <Button id="navGame" text="🎮 Eco-Juego" minWidth="150" height="50" />
+                <Button id="navTrivia" text="💡 Eco-Trivia" minWidth="150" height="50" />
+                <Button id="navEcoIA" text="🤖 EcoIA" minWidth="130" height="50" />
+                <Button id="navStats" text="📊 Estadísticas" minWidth="160" height="50" />
+                <Button id="navAbout" text="🏫 IED Pío X" minWidth="150" height="50" />
+            </ButtonGroup>
+
+            <!-- Student Profile Badge / Points Header -->
+            <Group id="userBadgeGroup" translation="[1480, 5]">
+                <Rectangle
+                    color="0x065F46CC"
+                    width="260"
+                    height="54"
+                    translation="[0, 0]"
+                />
+                <Label
+                    id="userPointsLabel"
+                    text="⭐ 150 Pts · 6° A"
+                    font="font:MediumBoldSystemFont"
+                    color="0xFDE047FF"
+                    translation="[20, 12]"
+                />
+            </Group>
+        </Group>
+
+        <!-- Divider Line -->
+        <Rectangle
+            color="0x10B9814D"
+            translation="[80, 125]"
+            width="1760"
+            height="2"
+        />
+
+        <!-- Active View / Screen Container -->
+        <Group id="screenContainer" translation="[80, 150]">
+            <!-- Child screens will be loaded here dynamically -->
+        </Group>
+
+        <!-- Toast / Notification Banner -->
+        <Group id="toastGroup" translation="[660, 960]" visible="false">
+            <Rectangle
+                id="toastBg"
+                color="0x064E3BFA"
+                width="600"
+                height="65"
+                translation="[0, 0]"
+            />
+            <Label
+                id="toastText"
+                text="¡Puntos Guardados!"
+                font="font:MediumBoldSystemFont"
+                color="0xFFFFFFFF"
+                horizAlign="center"
+                width="600"
+                translation="[0, 16]"
+            />
+        </Group>
+
+        <!-- Audio Player for Environmental Soundscapes & Sfx -->
+        <Audio id="sfxAudio" />
+    </children>
+</component>

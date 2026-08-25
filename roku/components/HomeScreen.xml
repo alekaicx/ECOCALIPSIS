@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="HomeScreen" extends="Group">
+    <interface>
+        <field id="actionRequested" type="string" alwaysNotify="true" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/HomeScreen.brs" />
+
+    <children>
+        <!-- Layout Container -->
+        <LayoutGroup layoutDirection="vert" itemSpacings="[25]" translation="[0, 10]">
+
+            <!-- HERO FEATURED BANNER: Cine-Foro El Lorax -->
+            <Group id="heroCard">
+                <Rectangle
+                    id="heroBg"
+                    color="0x064E3BCC"
+                    width="1760"
+                    height="350"
+                    translation="[0, 0]"
+                />
+                <!-- Accent left border -->
+                <Rectangle
+                    color="0xF59E0BFF"
+                    width="10"
+                    height="350"
+                    translation="[0, 0]"
+                />
+
+                <!-- Hero Image Preview -->
+                <Poster
+                    id="heroPoster"
+                    uri="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&amp;auto=format&amp;fit=crop&amp;q=80"
+                    width="480"
+                    height="290"
+                    translation="[30, 30]"
+                    loadDisplayMode="scaleToZoom"
+                />
+
+                <!-- Hero Content & Play Prompt -->
+                <Group translation="[540, 35]">
+                    <Rectangle color="0xF59E0B33" width="220" height="34" translation="[0, 0]" />
+                    <Label
+                        text="⭐ TALLER DESTACADO"
+                        font="font:SmallBoldSystemFont"
+                        color="0xFDE047FF"
+                        translation="[15, 6]"
+                    />
+
+                    <Label
+                        text="Cine-Foro: El Lorax y la Deforestación"
+                        font="font:LargeBoldSystemFont"
+                        color="0xFFFFFFFF"
+                        translation="[0, 46]"
+                    />
+
+                    <Label
+                        text="Descubre la importancia de cuidar los árboles de Truffula y cómo en la IED Pío X cada estudiante es un guardián de la naturaleza. Incluye preguntas de reflexión para tu clase."
+                        font="font:MediumSystemFont"
+                        color="0xCBD5E1FF"
+                        wrap="true"
+                        width="1150"
+                        translation="[0, 105]"
+                    />
+
+                    <!-- Action Buttons -->
+                    <ButtonGroup
+                        id="heroButtons"
+                        layoutDirection="horiz"
+                        itemSpacings="[20]"
+                        translation="[0, 205]"
+                    >
+                        <Button id="btnPlayMovie" text="▶ Ver Película &amp; Taller (OK)" minWidth="320" height="56" />
+                        <Button id="btnExploreWorkshops" text="📚 Explorar Todos los Talleres" minWidth="320" height="56" />
+                    </ButtonGroup>
+                </Group>
+            </Group>
+
+            <!-- ROW OF IMPACT METRICS -->
+            <Group id="metricsRow">
+                <!-- Metric 1: Árboles -->
+                <Group translation="[0, 0]">
+                    <Rectangle color="0x064E3B99" width="420" height="150" />
+                    <Label text="🌳 1,420 Árboles" font="font:LargeBoldSystemFont" color="0x34D399FF" translation="[25, 25]" />
+                    <Label text="Sembrados y apadrinados en la cuenca y el Páramo de Sumapaz" font="font:SmallSystemFont" color="0x94A3B8FF" wrap="true" width="370" translation="[25, 75]" />
+                </Group>
+
+                <!-- Metric 2: Agua -->
+                <Group translation="[445, 0]">
+                    <Rectangle color="0x064E3B99" width="420" height="150" />
+                    <Label text="💧 85,000 Litros" font="font:LargeBoldSystemFont" color="0x38BDF8FF" translation="[25, 25]" />
+                    <Label text="De agua ahorrada mediante buenas prácticas en la IED Pío X" font="font:SmallSystemFont" color="0x94A3B8FF" wrap="true" width="370" translation="[25, 75]" />
+                </Group>
+
+                <!-- Metric 3: Reciclaje -->
+                <Group translation="[890, 0]">
+                    <Rectangle color="0x064E3B99" width="420" height="150" />
+                    <Label text="♻️ 3,200 Kg" font="font:LargeBoldSystemFont" color="0xFACC15FF" translation="[25, 25]" />
+                    <Label text="De plástico y cartón reciclados en la caneca blanca escolar" font="font:SmallSystemFont" color="0x94A3B8FF" wrap="true" width="370" translation="[25, 75]" />
+                </Group>
+
+                <!-- Metric 4: Estudiantes Activos -->
+                <Group translation="[1335, 0]">
+                    <Rectangle color="0x064E3B99" width="425" height="150" />
+                    <Label text="🎓 450 Guardianes" font="font:LargeBoldSystemFont" color="0xA78BFAFF" translation="[25, 25]" />
+                    <Label text="Estudiantes y docentes activos en la red Ecocalipsis" font="font:SmallSystemFont" color="0x94A3B8FF" wrap="true" width="375" translation="[25, 75]" />
+                </Group>
+            </Group>
+
+            <!-- QUICK SHORTCUTS & DAILY ECO-TIP -->
+            <Group id="bottomRow">
+                <!-- Eco-Tip Box -->
+                <Group translation="[0, 0]">
+                    <Rectangle color="0x0478574D" width="900" height="260" />
+                    <Label text="💡 ECO-CONSEJO DE HOY (IED PÍO X)" font="font:MediumBoldSystemFont" color="0xFDE047FF" translation="[25, 25]" />
+                    <Label
+                        id="dailyTipText"
+                        text="🌱 'Cierra la llave mientras te aplicas jabón en las manos en los baños del colegio. Cada minuto con la llave cerrada ahorra hasta 6 litros de agua limpia de nuestros páramos.'"
+                        font="font:MediumSystemFont"
+                        color="0xFFFFFFFF"
+                        wrap="true"
+                        width="840"
+                        translation="[25, 70]"
+                    />
+                    <Label text="Presiona OK en el menú superior para consultar a EcoIA sobre más consejos." font="font:SmallSystemFont" color="0x6EE7B7FF" translation="[25, 205]" />
+                </Group>
+
+                <!-- Quick Game & Trivia Launchers -->
+                <Group translation="[930, 0]">
+                    <Rectangle color="0x1E293B99" width="830" height="260" />
+                    <Label text="🎯 DESAFÍOS INTERACTIVOS CON TU CONTROL REMOTO" font="font:MediumBoldSystemFont" color="0x34D399FF" translation="[30, 25]" />
+
+                    <ButtonGroup
+                        id="activityButtons"
+                        layoutDirection="horiz"
+                        itemSpacings="[25]"
+                        translation="[30, 95]"
+                    >
+                        <Button id="btnPlayGame" text="🎮 Jugar Separación" minWidth="360" height="60" />
+                        <Button id="btnPlayTrivia" text="💡 Desafío Trivia" minWidth="360" height="60" />
+                    </ButtonGroup>
+
+                    <Label text="Usa las flechas ◀ ▶ del control para clasificar residuos o responder preguntas." font="font:SmallSystemFont" color="0x94A3B8FF" translation="[30, 190]" />
+                </Group>
+            </Group>
+
+        </LayoutGroup>
+    </children>
+</component>
