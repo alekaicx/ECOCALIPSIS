@@ -20,7 +20,9 @@ import {
   HelpCircle,
   Lightbulb,
   Check,
-  RotateCcw
+  RotateCcw,
+  Maximize,
+  Minimize
 } from 'lucide-react';
 
 interface EcocalipsisWorkshopPresentationProps {
@@ -33,6 +35,8 @@ interface EcocalipsisWorkshopPresentationProps {
   handleAnswerSelect: (optIdx: number, qIdx: number) => void;
   onResetQuiz: () => void;
   onClose: () => void;
+  isFullscreen?: boolean;
+  onToggleFullscreen?: () => void;
 }
 
 export const ECOCALIPSIS_PRESENTATION_QUIZ = [
@@ -80,13 +84,15 @@ export const EcocalipsisWorkshopPresentation: React.FC<EcocalipsisWorkshopPresen
   userAnswers,
   handleAnswerSelect,
   onResetQuiz,
-  onClose
+  onClose,
+  isFullscreen,
+  onToggleFullscreen
 }) => {
   // Interactive states for slide 8 tabs
   const [activeTabTema, setActiveTabTema] = useState(0);
 
   return (
-    <div className="w-full min-h-full flex flex-col justify-between max-w-4xl mx-auto py-2">
+    <div className="w-full min-h-full flex flex-col justify-between max-w-5xl mx-auto py-2">
       {/* SLIDE 0: PORTADA */}
       {currentSlide === 0 && (
         <motion.div 
@@ -124,6 +130,25 @@ export const EcocalipsisWorkshopPresentation: React.FC<EcocalipsisWorkshopPresen
               <p className="text-sm text-slate-300 pt-2 font-normal leading-relaxed">
                 Una propuesta pedagógica juvenil, dinámica y transformadora para formar una cultura ambiental activa desde la infancia.
               </p>
+
+              {onToggleFullscreen && (
+                <div className="pt-3">
+                  <button
+                    onClick={onToggleFullscreen}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#00ff88]/15 hover:bg-[#00ff88]/25 text-[#00ff88] border border-[#00ff88]/40 text-xs sm:text-sm font-black transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-lg"
+                  >
+                    {isFullscreen ? (
+                      <>
+                        <Minimize className="w-4 h-4" /> Restaurar Pantalla
+                      </>
+                    ) : (
+                      <>
+                        <Maximize className="w-4 h-4" /> ⛶ Agrandar a Pantalla Completa
+                      </>
+                    )}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>

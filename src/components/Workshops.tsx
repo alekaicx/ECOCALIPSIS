@@ -29,7 +29,9 @@ import {
   Building2,
   Droplet,
   ShieldAlert,
-  ExternalLink
+  ExternalLink,
+  Maximize,
+  Minimize
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
@@ -74,6 +76,39 @@ export const Workshops: React.FC<WorkshopsProps> = ({
   const [reciclajeAnswer5, setReciclajeAnswer5] = useState<string | null>(null);
   const [reciclajeAnswer6, setReciclajeAnswer6] = useState<string>('');
   const [reciclajeAnswer7, setReciclajeAnswer7] = useState<string | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  React.useEffect(() => {
+    const handleFsChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+    document.addEventListener('fullscreenchange', handleFsChange);
+    document.addEventListener('webkitfullscreenchange', handleFsChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFsChange);
+      document.removeEventListener('webkitfullscreenchange', handleFsChange);
+    };
+  }, []);
+
+  const toggleFullscreen = () => {
+    try {
+      if (!document.fullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else if ((document.documentElement as any).webkitRequestFullscreen) {
+          (document.documentElement as any).webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        } else if ((document.exitFullscreen as any).webkitExitFullscreen) {
+          (document.exitFullscreen as any).webkitExitFullscreen();
+        }
+      }
+    } catch (err) {
+      console.warn('Fullscreen toggle not permitted in iframe sandbox:', err);
+    }
+  };
 
   const handleFinishAndReturnToStart = () => {
     setSelectedWorkshop(null);
@@ -255,14 +290,39 @@ export const Workshops: React.FC<WorkshopsProps> = ({
             className="fixed inset-0 z-50 bg-[#06140e] bg-gradient-to-b from-[#0c2016] via-[#08170f] to-[#040c08] overflow-y-auto flex flex-col min-h-screen w-full text-left"
           >
             <div className="w-full min-h-screen flex flex-col p-4 sm:p-8 md:p-12 relative text-left space-y-6 pb-28 max-w-6xl mx-auto justify-between">
-              {/* Floating Close Button */}
-              <button
-                onClick={() => setSelectedWorkshop(null)}
-                className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#183225]/80 hover:bg-[#204432] text-white flex items-center justify-center text-lg font-bold border border-[#00ff88]/40 shadow-2xl backdrop-blur-md transition-all cursor-pointer hover:scale-110"
-                title="Cerrar"
-              >
-                ✕
-              </button>
+              {/* Floating Action Controls (Fullscreen & Close) */}
+              <div className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 flex items-center gap-2">
+                <button
+                  onClick={toggleFullscreen}
+                  className="px-3 sm:px-4 h-10 sm:h-12 rounded-full bg-[#183225]/90 hover:bg-[#204432] text-[#00ff88] flex items-center gap-2 text-xs sm:text-sm font-black border border-[#00ff88]/40 shadow-2xl backdrop-blur-md transition-all cursor-pointer hover:scale-105 active:scale-95"
+                  title={isFullscreen ? 'Salir de pantalla completa (Esc)' : 'Agrandar toda la pantalla'}
+                >
+                  {isFullscreen ? (
+                    <>
+                      <Minimize className="w-4 h-4 text-[#00ff88]" />
+                      <span className="hidden sm:inline">Restaurar</span>
+                    </>
+                  ) : (
+                    <>
+                      <Maximize className="w-4 h-4 text-[#00ff88]" />
+                      <span className="hidden sm:inline">Pantalla Completa</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  onClick={() => {
+                    if (isFullscreen && document.fullscreenElement) {
+                      document.exitFullscreen?.().catch(() => {});
+                    }
+                    setSelectedWorkshop(null);
+                  }}
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#183225]/80 hover:bg-[#204432] text-white flex items-center justify-center text-lg font-bold border border-[#00ff88]/40 shadow-2xl backdrop-blur-md transition-all cursor-pointer hover:scale-110"
+                  title="Cerrar"
+                >
+                  ✕
+                </button>
+              </div>
 
               {/* Progress bar */}
               <div className="w-full bg-[#132a1e] h-2.5 rounded-full overflow-hidden border border-[#00ff88]/20">
@@ -285,7 +345,14 @@ export const Workshops: React.FC<WorkshopsProps> = ({
                     userAnswers={userAnswers}
                     handleAnswerSelect={handleAnswerSelect}
                     onResetQuiz={handleResetQuiz}
-                    onClose={() => setSelectedWorkshop(null)}
+                    onClose={() => {
+                      if (isFullscreen && document.fullscreenElement) {
+                        document.exitFullscreen?.().catch(() => {});
+                      }
+                      setSelectedWorkshop(null);
+                    }}
+                    isFullscreen={isFullscreen}
+                    onToggleFullscreen={toggleFullscreen}
                   />
                 ) : (
                   <>
